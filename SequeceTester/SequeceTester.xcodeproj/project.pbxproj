@@ -16,6 +16,13 @@
 		DA5110831CF093D70014D428 /* SequeceTesterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5110821CF093D70014D428 /* SequeceTesterTests.m */; };
 		DA51108E1CF093D70014D428 /* SequeceTesterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51108D1CF093D70014D428 /* SequeceTesterUITests.m */; };
 		DA51109C1CF0A0BB0014D428 /* MainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA51109B1CF0A0BB0014D428 /* MainCell.xib */; };
+		DAC2BC381CF572CE00D13EBD /* ConsoleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC371CF572CD00D13EBD /* ConsoleTableViewCell.m */; };
+		DAC2BC3A1CF5743700D13EBD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2BC391CF5743700D13EBD /* QuartzCore.framework */; };
+		DAC2BC431CF5747700D13EBD /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC3E1CF5747700D13EBD /* MFSideMenuContainerViewController.m */; };
+		DAC2BC441CF5747700D13EBD /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC401CF5747700D13EBD /* MFSideMenuShadow.m */; };
+		DAC2BC451CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC421CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.m */; };
+		DAC2BC481CF576D100D13EBD /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC471CF576D100D13EBD /* SideMenuViewController.m */; };
+		DAC2BC4B1CF57BEB00D13EBD /* PacketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC4A1CF57BEB00D13EBD /* PacketObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +60,20 @@
 		DA51108D1CF093D70014D428 /* SequeceTesterUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SequeceTesterUITests.m; sourceTree = "<group>"; };
 		DA51108F1CF093D70014D428 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA51109B1CF0A0BB0014D428 /* MainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainCell.xib; sourceTree = "<group>"; };
+		DAC2BC361CF572CD00D13EBD /* ConsoleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleTableViewCell.h; sourceTree = "<group>"; };
+		DAC2BC371CF572CD00D13EBD /* ConsoleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleTableViewCell.m; sourceTree = "<group>"; };
+		DAC2BC391CF5743700D13EBD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DAC2BC3C1CF5747700D13EBD /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
+		DAC2BC3D1CF5747700D13EBD /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
+		DAC2BC3E1CF5747700D13EBD /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
+		DAC2BC3F1CF5747700D13EBD /* MFSideMenuShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuShadow.h; sourceTree = "<group>"; };
+		DAC2BC401CF5747700D13EBD /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
+		DAC2BC411CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
+		DAC2BC421CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		DAC2BC461CF576D100D13EBD /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
+		DAC2BC471CF576D100D13EBD /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
+		DAC2BC491CF57BEB00D13EBD /* PacketObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketObject.h; sourceTree = "<group>"; };
+		DAC2BC4A1CF57BEB00D13EBD /* PacketObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAC2BC3A1CF5743700D13EBD /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +105,7 @@
 		DA51105C1CF093D70014D428 = {
 			isa = PBXGroup;
 			children = (
+				DAC2BC391CF5743700D13EBD /* QuartzCore.framework */,
 				DA5110671CF093D70014D428 /* SequeceTester */,
 				DA5110811CF093D70014D428 /* SequeceTesterTests */,
 				DA51108C1CF093D70014D428 /* SequeceTesterUITests */,
@@ -103,10 +126,17 @@
 		DA5110671CF093D70014D428 /* SequeceTester */ = {
 			isa = PBXGroup;
 			children = (
+				DAC2BC3B1CF5747700D13EBD /* MFSideMenu */,
 				DA51106B1CF093D70014D428 /* AppDelegate.h */,
 				DA51106C1CF093D70014D428 /* AppDelegate.m */,
 				DA51106E1CF093D70014D428 /* ViewController.h */,
 				DA51106F1CF093D70014D428 /* ViewController.m */,
+				DAC2BC461CF576D100D13EBD /* SideMenuViewController.h */,
+				DAC2BC471CF576D100D13EBD /* SideMenuViewController.m */,
+				DAC2BC361CF572CD00D13EBD /* ConsoleTableViewCell.h */,
+				DAC2BC371CF572CD00D13EBD /* ConsoleTableViewCell.m */,
+				DAC2BC491CF57BEB00D13EBD /* PacketObject.h */,
+				DAC2BC4A1CF57BEB00D13EBD /* PacketObject.m */,
 				DA5110711CF093D70014D428 /* Main.storyboard */,
 				DA51109B1CF0A0BB0014D428 /* MainCell.xib */,
 				DA5110741CF093D70014D428 /* Assets.xcassets */,
@@ -141,6 +171,20 @@
 				DA51108F1CF093D70014D428 /* Info.plist */,
 			);
 			path = SequeceTesterUITests;
+			sourceTree = "<group>";
+		};
+		DAC2BC3B1CF5747700D13EBD /* MFSideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				DAC2BC3C1CF5747700D13EBD /* MFSideMenu.h */,
+				DAC2BC3D1CF5747700D13EBD /* MFSideMenuContainerViewController.h */,
+				DAC2BC3E1CF5747700D13EBD /* MFSideMenuContainerViewController.m */,
+				DAC2BC3F1CF5747700D13EBD /* MFSideMenuShadow.h */,
+				DAC2BC401CF5747700D13EBD /* MFSideMenuShadow.m */,
+				DAC2BC411CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.h */,
+				DAC2BC421CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.m */,
+			);
+			path = MFSideMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,8 +320,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA5110701CF093D70014D428 /* ViewController.m in Sources */,
+				DAC2BC4B1CF57BEB00D13EBD /* PacketObject.m in Sources */,
 				DA51106D1CF093D70014D428 /* AppDelegate.m in Sources */,
 				DA51106A1CF093D70014D428 /* main.m in Sources */,
+				DAC2BC381CF572CE00D13EBD /* ConsoleTableViewCell.m in Sources */,
+				DAC2BC481CF576D100D13EBD /* SideMenuViewController.m in Sources */,
+				DAC2BC441CF5747700D13EBD /* MFSideMenuShadow.m in Sources */,
+				DAC2BC431CF5747700D13EBD /* MFSideMenuContainerViewController.m in Sources */,
+				DAC2BC451CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +555,7 @@
 				DA5110941CF093D70014D428 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DA5110951CF093D70014D428 /* Build configuration list for PBXNativeTarget "SequeceTesterTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +564,7 @@
 				DA5110971CF093D70014D428 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DA5110981CF093D70014D428 /* Build configuration list for PBXNativeTarget "SequeceTesterUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +573,7 @@
 				DA51109A1CF093D70014D428 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

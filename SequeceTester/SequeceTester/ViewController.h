@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MFSideMenu.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController {
+    NSMutableArray *packetArray;
+}
 
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
+- (IBAction)showMenu:(id)sender;
 @end
 

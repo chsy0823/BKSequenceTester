@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "MFSideMenu.h"
+#import "SideMenuViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    SideMenuViewController *leftMenuViewController = [[SideMenuViewController alloc] init];
+    
+    MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
+                                                    containerWithCenterViewController:self.window.rootViewController
+                                                    leftMenuViewController:leftMenuViewController
+                                                    rightMenuViewController:nil];
+    self.window.rootViewController = container;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
