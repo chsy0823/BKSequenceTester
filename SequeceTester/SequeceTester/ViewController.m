@@ -43,9 +43,16 @@
     [self.menuContainerViewController setMenuState:MFSideMenuStateLeftMenuOpen];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 22;
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [packetArray count];
@@ -59,7 +66,7 @@
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"MainCell" owner:self options:nil];
     cell = [topLevelObjects objectAtIndex:object.RXTX-1];
 
-    cell.textLabel.text = [NSString stringWithFormat:@"    %@",object.contents];
+    cell.contentLabel.text = [NSString stringWithFormat:@"    %@",object.contents];
     
     return cell;
 }

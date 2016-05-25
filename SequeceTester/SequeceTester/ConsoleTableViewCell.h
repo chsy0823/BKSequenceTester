@@ -12,5 +12,5 @@
 
 
 @property (nonatomic,weak) IBOutlet UILabel *indicator;
-@property (nonatomic,weak) IBOutlet UILabel *textLabel;
+@property (nonatomic,weak) IBOutlet UILabel *contentLabel;
 @end

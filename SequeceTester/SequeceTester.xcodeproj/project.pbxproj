@@ -23,6 +23,7 @@
 		DAC2BC451CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC421CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.m */; };
 		DAC2BC481CF576D100D13EBD /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC471CF576D100D13EBD /* SideMenuViewController.m */; };
 		DAC2BC4B1CF57BEB00D13EBD /* PacketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC4A1CF57BEB00D13EBD /* PacketObject.m */; };
+		DAC2BC4E1CF6157700D13EBD /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC4D1CF6157700D13EBD /* NetworkController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		DAC2BC471CF576D100D13EBD /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
 		DAC2BC491CF57BEB00D13EBD /* PacketObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketObject.h; sourceTree = "<group>"; };
 		DAC2BC4A1CF57BEB00D13EBD /* PacketObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketObject.m; sourceTree = "<group>"; };
+		DAC2BC4C1CF6157700D13EBD /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkController.h; sourceTree = "<group>"; };
+		DAC2BC4D1CF6157700D13EBD /* NetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +138,8 @@
 				DAC2BC471CF576D100D13EBD /* SideMenuViewController.m */,
 				DAC2BC361CF572CD00D13EBD /* ConsoleTableViewCell.h */,
 				DAC2BC371CF572CD00D13EBD /* ConsoleTableViewCell.m */,
+				DAC2BC4C1CF6157700D13EBD /* NetworkController.h */,
+				DAC2BC4D1CF6157700D13EBD /* NetworkController.m */,
 				DAC2BC491CF57BEB00D13EBD /* PacketObject.h */,
 				DAC2BC4A1CF57BEB00D13EBD /* PacketObject.m */,
 				DA5110711CF093D70014D428 /* Main.storyboard */,
@@ -323,6 +328,7 @@
 				DAC2BC4B1CF57BEB00D13EBD /* PacketObject.m in Sources */,
 				DA51106D1CF093D70014D428 /* AppDelegate.m in Sources */,
 				DA51106A1CF093D70014D428 /* main.m in Sources */,
+				DAC2BC4E1CF6157700D13EBD /* NetworkController.m in Sources */,
 				DAC2BC381CF572CE00D13EBD /* ConsoleTableViewCell.m in Sources */,
 				DAC2BC481CF576D100D13EBD /* SideMenuViewController.m in Sources */,
 				DAC2BC441CF5747700D13EBD /* MFSideMenuShadow.m in Sources */,
@@ -470,6 +476,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SequeceTester/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bako.sequeceTester.SequeceTester;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -482,6 +489,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SequeceTester/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bako.sequeceTester.SequeceTester;
 				PRODUCT_NAME = "$(TARGET_NAME)";

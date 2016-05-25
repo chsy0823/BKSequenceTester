@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ri-qJ-QNN" id="VP6-aq-lwy">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="21.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RA0-PH-8c6">
@@ -44,8 +44,8 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="contentLabel" destination="wIv-po-FZg" id="8TP-To-of0"/>
                 <outlet property="indicator" destination="RA0-PH-8c6" id="fbE-Lc-zYE"/>
-                <outlet property="textLabel" destination="wIv-po-FZg" id="xeq-AS-wNn"/>
             </connections>
             <point key="canvasLocation" x="485" y="431"/>
         </tableViewCell>
@@ -53,7 +53,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VbG-Ir-4Z4" id="pI5-PA-98E">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="21.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW1-Ip-tfw">
@@ -63,7 +63,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vW-A1-aPF">
-                        <rect key="frame" x="35" y="0.0" width="35.5" height="21"/>
+                        <rect key="frame" x="35" y="0.0" width="36" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -86,8 +86,8 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="contentLabel" destination="7vW-A1-aPF" id="kdG-kb-R8B"/>
                 <outlet property="indicator" destination="lW1-Ip-tfw" id="GTJ-P2-Xz5"/>
-                <outlet property="textLabel" destination="7vW-A1-aPF" id="WFc-90-P0J"/>
             </connections>
             <point key="canvasLocation" x="485" y="507"/>
         </tableViewCell>
