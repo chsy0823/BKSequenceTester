@@ -15,10 +15,12 @@
     NSInputStream *InputStream;
     NSOutputStream *OutputStream;
     NSMutableData *OutputData;
+    NSNotificationCenter *notificationCenter;
 }
 
+@property (nonatomic, strong) NSString *currentObserverName;
 + (NetworkController *)sharedInstance;
 - (void)setServerWithIP:(NSString*)ip Port:(int)port;
-- (void)sendCommand:(NSInteger)command;
+- (void)sendCommand:(int)command Data:(NSString*)data;
 
 @end

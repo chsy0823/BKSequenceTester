@@ -50,6 +50,8 @@
     
     [sendNotification addObserver:self selector:@selector(networkCallback:) name:OBSERVERNAME object:nil];
     networkController = [NetworkController sharedInstance];
+    networkController.currentObserverName = OBSERVERNAME;
+    
 }
 
 - (void)networkCallback:(NSNotification*)notification {
@@ -80,7 +82,7 @@
             [self showIPPopup];
             break;
         case DisconnectTCPIP:
-            [networkController sendCommand:command];
+            
             break;
             
         default:
@@ -119,7 +121,8 @@
 
 - (void)setIP:(NSString*)ip Port:(NSString*)port {
     
-    NSLog(@"ip = %@ port = %@",ip,port);
+    [networkController setServerWithIP:ip Port:[port intValue]];
+    [networkController sendCommand:002 Data:@"test"];
 }
 
 @end
