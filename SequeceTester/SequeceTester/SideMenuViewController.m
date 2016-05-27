@@ -6,6 +6,7 @@
 
 #import "SideMenuViewController.h"
 #import "MFSideMenu.h"
+#import "MainViewController.h"
 
 @implementation SideMenuViewController
 
@@ -51,6 +52,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+    
+    MainViewController *viewController = self.menuContainerViewController.centerViewController;
+    [viewController executeCommand:indexPath.row];
 }
 
 @end

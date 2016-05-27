@@ -39,6 +39,10 @@ static NetworkController *singletonInstance;
     [self TcpClientInitialise];
 }
 
+- (void)sendCommand:(NSInteger)command {
+    
+}
+
 //*******************************************
 //*******************************************
 //********** TCP CLIENT INITIALISE **********
@@ -66,6 +70,7 @@ static NetworkController *singletonInstance;
     [InputStream open];
     [OutputStream open];
 }
+
 
 //**********************************
 //**********************************
@@ -111,8 +116,6 @@ static NetworkController *singletonInstance;
                         {
                             NSLog(@"TCP Client - Server sent: %@", output);
                         }
-                        
-                        
                         
                         //Send some data (large block where the write may not actually send all we request it to send)
                         int ActualOutputBytes = [OutputStream write:[OutputData bytes] maxLength:[OutputData length]];

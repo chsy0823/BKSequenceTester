@@ -8,13 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "MFSideMenu.h"
+#import "NetworkController.h"
 
-@interface ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate> {
+@interface MainViewController : UIViewController<UITableViewDataSource, UITableViewDelegate> {
+    
     NSMutableArray *packetArray;
+    NetworkController *networkController;
+
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 - (IBAction)showMenu:(id)sender;
+- (void)executeCommand:(NSInteger)command;
 @end
 

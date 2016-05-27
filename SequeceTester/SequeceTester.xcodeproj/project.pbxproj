@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		DA51106A1CF093D70014D428 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5110691CF093D70014D428 /* main.m */; };
 		DA51106D1CF093D70014D428 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51106C1CF093D70014D428 /* AppDelegate.m */; };
-		DA5110701CF093D70014D428 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51106F1CF093D70014D428 /* ViewController.m */; };
+		DA5110701CF093D70014D428 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51106F1CF093D70014D428 /* MainViewController.m */; };
 		DA5110731CF093D70014D428 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5110711CF093D70014D428 /* Main.storyboard */; };
 		DA5110751CF093D70014D428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA5110741CF093D70014D428 /* Assets.xcassets */; };
 		DA5110781CF093D70014D428 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5110761CF093D70014D428 /* LaunchScreen.storyboard */; };
@@ -24,6 +24,8 @@
 		DAC2BC481CF576D100D13EBD /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC471CF576D100D13EBD /* SideMenuViewController.m */; };
 		DAC2BC4B1CF57BEB00D13EBD /* PacketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC4A1CF57BEB00D13EBD /* PacketObject.m */; };
 		DAC2BC4E1CF6157700D13EBD /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC4D1CF6157700D13EBD /* NetworkController.m */; };
+		DAC2BC501CF76EC200D13EBD /* PopupCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC2BC4F1CF76EC200D13EBD /* PopupCollection.xib */; };
+		DAC2BC531CF7712400D13EBD /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC521CF7712400D13EBD /* PopupViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +50,8 @@
 		DA5110691CF093D70014D428 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DA51106B1CF093D70014D428 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DA51106C1CF093D70014D428 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		DA51106E1CF093D70014D428 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		DA51106F1CF093D70014D428 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DA51106E1CF093D70014D428 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		DA51106F1CF093D70014D428 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		DA5110721CF093D70014D428 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA5110741CF093D70014D428 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA5110771CF093D70014D428 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -77,6 +79,10 @@
 		DAC2BC4A1CF57BEB00D13EBD /* PacketObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketObject.m; sourceTree = "<group>"; };
 		DAC2BC4C1CF6157700D13EBD /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkController.h; sourceTree = "<group>"; };
 		DAC2BC4D1CF6157700D13EBD /* NetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkController.m; sourceTree = "<group>"; };
+		DAC2BC4F1CF76EC200D13EBD /* PopupCollection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupCollection.xib; sourceTree = "<group>"; };
+		DAC2BC511CF7712400D13EBD /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
+		DAC2BC521CF7712400D13EBD /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupViewController.m; sourceTree = "<group>"; };
+		DAC2BC541CF77B3300D13EBD /* CommandList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandList.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,8 +138,8 @@
 				DAC2BC3B1CF5747700D13EBD /* MFSideMenu */,
 				DA51106B1CF093D70014D428 /* AppDelegate.h */,
 				DA51106C1CF093D70014D428 /* AppDelegate.m */,
-				DA51106E1CF093D70014D428 /* ViewController.h */,
-				DA51106F1CF093D70014D428 /* ViewController.m */,
+				DA51106E1CF093D70014D428 /* MainViewController.h */,
+				DA51106F1CF093D70014D428 /* MainViewController.m */,
 				DAC2BC461CF576D100D13EBD /* SideMenuViewController.h */,
 				DAC2BC471CF576D100D13EBD /* SideMenuViewController.m */,
 				DAC2BC361CF572CD00D13EBD /* ConsoleTableViewCell.h */,
@@ -142,7 +148,11 @@
 				DAC2BC4D1CF6157700D13EBD /* NetworkController.m */,
 				DAC2BC491CF57BEB00D13EBD /* PacketObject.h */,
 				DAC2BC4A1CF57BEB00D13EBD /* PacketObject.m */,
+				DAC2BC511CF7712400D13EBD /* PopupViewController.h */,
+				DAC2BC521CF7712400D13EBD /* PopupViewController.m */,
+				DAC2BC541CF77B3300D13EBD /* CommandList.h */,
 				DA5110711CF093D70014D428 /* Main.storyboard */,
+				DAC2BC4F1CF76EC200D13EBD /* PopupCollection.xib */,
 				DA51109B1CF0A0BB0014D428 /* MainCell.xib */,
 				DA5110741CF093D70014D428 /* Assets.xcassets */,
 				DA5110761CF093D70014D428 /* LaunchScreen.storyboard */,
@@ -300,6 +310,7 @@
 				DA51109C1CF0A0BB0014D428 /* MainCell.xib in Resources */,
 				DA5110751CF093D70014D428 /* Assets.xcassets in Resources */,
 				DA5110731CF093D70014D428 /* Main.storyboard in Resources */,
+				DAC2BC501CF76EC200D13EBD /* PopupCollection.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,11 +335,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA5110701CF093D70014D428 /* ViewController.m in Sources */,
+				DA5110701CF093D70014D428 /* MainViewController.m in Sources */,
 				DAC2BC4B1CF57BEB00D13EBD /* PacketObject.m in Sources */,
 				DA51106D1CF093D70014D428 /* AppDelegate.m in Sources */,
 				DA51106A1CF093D70014D428 /* main.m in Sources */,
 				DAC2BC4E1CF6157700D13EBD /* NetworkController.m in Sources */,
+				DAC2BC531CF7712400D13EBD /* PopupViewController.m in Sources */,
 				DAC2BC381CF572CE00D13EBD /* ConsoleTableViewCell.m in Sources */,
 				DAC2BC481CF576D100D13EBD /* SideMenuViewController.m in Sources */,
 				DAC2BC441CF5747700D13EBD /* MFSideMenuShadow.m in Sources */,

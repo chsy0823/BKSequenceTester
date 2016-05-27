@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CommandList.h"
 
 @interface NetworkController : NSObject<NSStreamDelegate> {
     NSString *serverIP;
@@ -18,5 +19,6 @@
 
 + (NetworkController *)sharedInstance;
 - (void)setServerWithIP:(NSString*)ip Port:(int)port;
+- (void)sendCommand:(NSInteger)command;
 
 @end

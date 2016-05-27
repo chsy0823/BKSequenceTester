@@ -6,20 +6,25 @@
 //  Copyright © 2016년 bako. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainViewController.h"
 #import "ConsoleTableViewCell.h"
 #import "PacketObject.h"
+#import "PopupViewController.h"
 
-@interface ViewController ()
+#define OBSERVERNAME @"networkCallback"
+
+
+@interface MainViewController () <PopupDelegate>
 
 @end
 
-@implementation ViewController
+@implementation MainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    [self readyForNetwork];
     packetArray = [NSMutableArray array];
     
     PacketObject *temp1 = [[PacketObject alloc]init];
@@ -39,10 +44,49 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)readyForNetwork {
+    
+    NSNotificationCenter *sendNotification = [NSNotificationCenter defaultCenter];
+    
+    [sendNotification addObserver:self selector:@selector(networkCallback:) name:OBSERVERNAME object:nil];
+    networkController = [NetworkController sharedInstance];
+}
+
+- (void)networkCallback:(NSNotification*)notification {
+
+    NSDictionary* dict = (NSDictionary*)notification.userInfo;
+    NSLog(@"%@",dict);
+}
+
+- (void)showIPPopup {
+    
+    NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"PopupCollection" owner:self options:nil];
+    
+    PopupViewController *popup = [cellArray objectAtIndex:0];
+    popup.delegate = self;
+    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    
+    [self presentViewController:popup animated:NO completion:nil];
+}
+
 - (IBAction)showMenu:(id)sender {
     [self.menuContainerViewController setMenuState:MFSideMenuStateLeftMenuOpen];
 }
 
+- (void)executeCommand:(NSInteger)command {
+    
+    switch (command) {
+        case ConnectTCPIP:
+            [self showIPPopup];
+            break;
+        case DisconnectTCPIP:
+            [networkController sendCommand:command];
+            break;
+            
+        default:
+            break;
+    }
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 22;
@@ -69,6 +113,13 @@
     cell.contentLabel.text = [NSString stringWithFormat:@"    %@",object.contents];
     
     return cell;
+}
+
+#pragma mark PopupDelegate
+
+- (void)setIP:(NSString*)ip Port:(NSString*)port {
+    
+    NSLog(@"ip = %@ port = %@",ip,port);
 }
 
 @end
