@@ -13,6 +13,8 @@
 
 #define OBSERVERNAME @"networkCallback"
 
+#define PATHDEFAULT 1
+#define PATHSPEAKER 2
 
 @interface MainViewController () <PopupDelegate>
 
@@ -27,6 +29,8 @@
     [self readyForNetwork];
     packetArray = [NSMutableArray array];
     
+    isBTConnected = false;
+    
     PacketObject *temp1 = [[PacketObject alloc]init];
     temp1.contents = @"Start Test";
     temp1.RXTX = RX;
@@ -37,6 +41,13 @@
     
     [packetArray addObject:temp1];
     [packetArray addObject:temp2];
+    
+    NSString *path = [NSString stringWithFormat:@"%@/sound.wav", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundUrl = [NSURL fileURLWithPath:path];
+    
+    // Create audio player object and initialize with URL to sound
+    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
+    audioSession = [AVAudioSession sharedInstance];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,11 +80,51 @@
     [self presentViewController:popup animated:NO completion:nil];
 }
 
+- (void)playSound:(int)path Stop:(BOOL)stop {
+    
+    if(stop) {
+        [audioPlayer stop];
+    }
+    else {
+        
+        if(path == PATHDEFAULT) {
+            [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+            [audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideNone error:nil];
+        }
+        else {
+            [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+            [audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
+        }
+        
+        [audioPlayer play];
+        
+    }
+}
+
+- (void)connectBluetooth {
+    
+}
+
+- (void)disconnectBluetooth {
+    
+}
+
+- (void)loopbackMode:(BOOL)on {
+    
+    if(on) {
+        
+    }
+    else {
+        
+    }
+}
+
+
 - (IBAction)showMenu:(id)sender {
     [self.menuContainerViewController setMenuState:MFSideMenuStateLeftMenuOpen];
 }
 
-- (void)executeCommand:(NSInteger)command {
+- (void)executeSideMenuAction:(NSInteger)command {
     
     switch (command) {
         case ConnectTCPIP:
@@ -82,11 +133,29 @@
         case DisconnectTCPIP:
             [networkController sendCommand:command];
             break;
-            
+        case ConnectBT:
+            break;
+        case DisconnectBT:
+            break;
+        case SPKWavePlay:
+            if(!isBTConnected)
+                [self playSound:PATHSPEAKER Stop:false];
+            break;
+        case RCVWavePlay:
+            if(!isBTConnected)
+                [self playSound:PATHDEFAULT Stop:false];
+            break;
+        case EARWavePlay:
+            if(!isBTConnected)
+                [self playSound:PATHDEFAULT Stop:false];
+            break;
         default:
+            
             break;
     }
 }
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 22;

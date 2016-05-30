@@ -54,7 +54,7 @@
     [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
     
     MainViewController *viewController = self.menuContainerViewController.centerViewController;
-    [viewController executeCommand:indexPath.row];
+    [viewController executeSideMenuAction:indexPath.row];
 }
 
 @end

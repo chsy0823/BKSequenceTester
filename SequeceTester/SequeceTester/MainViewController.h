@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "MFSideMenu.h"
 #import "NetworkController.h"
 
@@ -14,12 +15,15 @@
     
     NSMutableArray *packetArray;
     NetworkController *networkController;
+    AVAudioPlayer *audioPlayer;
+    AVAudioSession *audioSession;
+    BOOL isBTConnected;
 
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 - (IBAction)showMenu:(id)sender;
-- (void)executeCommand:(NSInteger)command;
+- (void)executeSideMenuAction:(NSInteger)command;
 @end
 

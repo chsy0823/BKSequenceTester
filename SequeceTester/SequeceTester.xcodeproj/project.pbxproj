@@ -26,6 +26,13 @@
 		DAC2BC4E1CF6157700D13EBD /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC4D1CF6157700D13EBD /* NetworkController.m */; };
 		DAC2BC501CF76EC200D13EBD /* PopupCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC2BC4F1CF76EC200D13EBD /* PopupCollection.xib */; };
 		DAC2BC531CF7712400D13EBD /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC521CF7712400D13EBD /* PopupViewController.m */; };
+		DAC2BC561CFB3E6200D13EBD /* sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAC2BC551CFB3E6200D13EBD /* sound.wav */; };
+		DAC2BC5F1CFBF4B400D13EBD /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC581CFBF4B400D13EBD /* AudioController.mm */; };
+		DAC2BC601CFBF4B400D13EBD /* BufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC5A1CFBF4B400D13EBD /* BufferManager.cpp */; };
+		DAC2BC611CFBF4B400D13EBD /* FFTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC5C1CFBF4B400D13EBD /* FFTHelper.cpp */; };
+		DAC2BC621CFBF4B400D13EBD /* DCRejectionFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC5E1CFBF4B400D13EBD /* DCRejectionFilter.cpp */; };
+		DAC2BC651CFBF4E500D13EBD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2BC641CFBF4E500D13EBD /* AudioToolbox.framework */; };
+		DAC2BC671CFBF4F700D13EBD /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2BC661CFBF4F700D13EBD /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +90,17 @@
 		DAC2BC511CF7712400D13EBD /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
 		DAC2BC521CF7712400D13EBD /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupViewController.m; sourceTree = "<group>"; };
 		DAC2BC541CF77B3300D13EBD /* CommandList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandList.h; sourceTree = "<group>"; };
+		DAC2BC551CFB3E6200D13EBD /* sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound.wav; sourceTree = "<group>"; };
+		DAC2BC571CFBF4B400D13EBD /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
+		DAC2BC581CFBF4B400D13EBD /* AudioController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioController.mm; sourceTree = "<group>"; };
+		DAC2BC591CFBF4B400D13EBD /* BufferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferManager.h; sourceTree = "<group>"; };
+		DAC2BC5A1CFBF4B400D13EBD /* BufferManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferManager.cpp; sourceTree = "<group>"; };
+		DAC2BC5B1CFBF4B400D13EBD /* FFTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTHelper.h; sourceTree = "<group>"; };
+		DAC2BC5C1CFBF4B400D13EBD /* FFTHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFTHelper.cpp; sourceTree = "<group>"; };
+		DAC2BC5D1CFBF4B400D13EBD /* DCRejectionFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRejectionFilter.h; sourceTree = "<group>"; };
+		DAC2BC5E1CFBF4B400D13EBD /* DCRejectionFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DCRejectionFilter.cpp; sourceTree = "<group>"; };
+		DAC2BC641CFBF4E500D13EBD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DAC2BC661CFBF4F700D13EBD /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAC2BC671CFBF4F700D13EBD /* Accelerate.framework in Frameworks */,
+				DAC2BC651CFBF4E500D13EBD /* AudioToolbox.framework in Frameworks */,
 				DAC2BC3A1CF5743700D13EBD /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +134,8 @@
 		DA51105C1CF093D70014D428 = {
 			isa = PBXGroup;
 			children = (
+				DAC2BC661CFBF4F700D13EBD /* Accelerate.framework */,
+				DAC2BC641CFBF4E500D13EBD /* AudioToolbox.framework */,
 				DAC2BC391CF5743700D13EBD /* QuartzCore.framework */,
 				DA5110671CF093D70014D428 /* SequeceTester */,
 				DA5110811CF093D70014D428 /* SequeceTesterTests */,
@@ -135,6 +157,8 @@
 		DA5110671CF093D70014D428 /* SequeceTester */ = {
 			isa = PBXGroup;
 			children = (
+				DAC2BC551CFB3E6200D13EBD /* sound.wav */,
+				DAC2BC631CFBF4BB00D13EBD /* AudioLib */,
 				DAC2BC3B1CF5747700D13EBD /* MFSideMenu */,
 				DA51106B1CF093D70014D428 /* AppDelegate.h */,
 				DA51106C1CF093D70014D428 /* AppDelegate.m */,
@@ -200,6 +224,21 @@
 				DAC2BC421CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.m */,
 			);
 			path = MFSideMenu;
+			sourceTree = "<group>";
+		};
+		DAC2BC631CFBF4BB00D13EBD /* AudioLib */ = {
+			isa = PBXGroup;
+			children = (
+				DAC2BC571CFBF4B400D13EBD /* AudioController.h */,
+				DAC2BC581CFBF4B400D13EBD /* AudioController.mm */,
+				DAC2BC591CFBF4B400D13EBD /* BufferManager.h */,
+				DAC2BC5A1CFBF4B400D13EBD /* BufferManager.cpp */,
+				DAC2BC5B1CFBF4B400D13EBD /* FFTHelper.h */,
+				DAC2BC5C1CFBF4B400D13EBD /* FFTHelper.cpp */,
+				DAC2BC5D1CFBF4B400D13EBD /* DCRejectionFilter.h */,
+				DAC2BC5E1CFBF4B400D13EBD /* DCRejectionFilter.cpp */,
+			);
+			name = AudioLib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,6 +349,7 @@
 				DA51109C1CF0A0BB0014D428 /* MainCell.xib in Resources */,
 				DA5110751CF093D70014D428 /* Assets.xcassets in Resources */,
 				DA5110731CF093D70014D428 /* Main.storyboard in Resources */,
+				DAC2BC561CFB3E6200D13EBD /* sound.wav in Resources */,
 				DAC2BC501CF76EC200D13EBD /* PopupCollection.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,13 +375,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAC2BC621CFBF4B400D13EBD /* DCRejectionFilter.cpp in Sources */,
+				DAC2BC611CFBF4B400D13EBD /* FFTHelper.cpp in Sources */,
 				DA5110701CF093D70014D428 /* MainViewController.m in Sources */,
 				DAC2BC4B1CF57BEB00D13EBD /* PacketObject.m in Sources */,
 				DA51106D1CF093D70014D428 /* AppDelegate.m in Sources */,
 				DA51106A1CF093D70014D428 /* main.m in Sources */,
+				DAC2BC5F1CFBF4B400D13EBD /* AudioController.mm in Sources */,
 				DAC2BC4E1CF6157700D13EBD /* NetworkController.m in Sources */,
 				DAC2BC531CF7712400D13EBD /* PopupViewController.m in Sources */,
 				DAC2BC381CF572CE00D13EBD /* ConsoleTableViewCell.m in Sources */,
+				DAC2BC601CFBF4B400D13EBD /* BufferManager.cpp in Sources */,
 				DAC2BC481CF576D100D13EBD /* SideMenuViewController.m in Sources */,
 				DAC2BC441CF5747700D13EBD /* MFSideMenuShadow.m in Sources */,
 				DAC2BC431CF5747700D13EBD /* MFSideMenuContainerViewController.m in Sources */,
