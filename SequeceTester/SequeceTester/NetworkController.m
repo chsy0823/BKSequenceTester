@@ -11,6 +11,7 @@
 static NetworkController *singletonInstance;
 
 @implementation NetworkController
+@synthesize currentObserverName;
 
 + (NetworkController *)sharedInstance {
     
@@ -28,6 +29,42 @@ static NetworkController *singletonInstance;
 
 - (void)initNetworkController {
     
+    notificationCenter = [NSNotificationCenter defaultCenter];
+    //[self parsePacket:[self makePacekt:002 Data:@"1q2w3e4r"]];
+    
+}
+
+- (NSString*)makePacekt:(int)command Data:(NSString*)data {
+    
+    int length = (int)[data length] + 2;
+    NSString *dataPacket = [NSString stringWithFormat:@":%03d%03d%@\r\n",command,length,data];
+    
+    return dataPacket;
+}
+
+- (NSDictionary*)parsePacket:(NSString*)inputData {
+    
+    
+    if([inputData length] > 3) {
+        NSString *STX = [inputData substringToIndex:1];
+        NSString *CRLF = [inputData substringFromIndex:[inputData length]-2];
+        
+        if([STX isEqualToString:@":"] && [CRLF isEqualToString:@"\r\n"]) {
+            NSString *command = [inputData substringWithRange:NSMakeRange(1, 3)];
+            NSString *length = [inputData substringWithRange:NSMakeRange(4, 3)];
+            NSString *data = [inputData substringWithRange:NSMakeRange(7, [inputData length]-9)];
+            
+            //NSLog(@"stx = %@ CRLF = %@ command = %@ length = %@ data = %@",STX, CRLF, command, length, data);
+            NSLog(@"parse ok!");
+            NSDictionary *dict = @{@"command":command,
+                     @"data":data, @"fullData":inputData
+                     };
+            
+            return dict;
+        }
+    }
+    
+    return nil;
     
 }
 
@@ -39,7 +76,12 @@ static NetworkController *singletonInstance;
     [self TcpClientInitialise];
 }
 
-- (void)sendCommand:(NSInteger)command {
+- (void)sendCommand:(int)command Data:(NSString*)data{
+    
+    NSString *packet = [self makePacekt:command Data:data];
+    
+    const uint8_t * rawstring = (const uint8_t *)[packet UTF8String];
+    [OutputStream write:rawstring maxLength:strlen(rawstring)];
     
 }
 
@@ -50,7 +92,7 @@ static NetworkController *singletonInstance;
 //*******************************************
 - (void)TcpClientInitialise
 {
-    NSLog(@"Tcp Client Initialise");
+    NSLog(@"Tcp Client Initialise.. Connect to ip = %@, port = %d",serverIP, serverPort);
     
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
@@ -115,6 +157,11 @@ static NetworkController *singletonInstance;
                         if (nil != output)
                         {
                             NSLog(@"TCP Client - Server sent: %@", output);
+                            
+                            NSDictionary *result = [self parsePacket:output];
+                            
+                            if(result != nil)
+                                [notificationCenter postNotificationName:currentObserverName object:self userInfo:result];
                         }
                         
                         //Send some data (large block where the write may not actually send all we request it to send)
