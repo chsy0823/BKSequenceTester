@@ -17,8 +17,21 @@
 #define RCVWavePlay     5
 #define EARWavePlay     6
 #define LoopBackONOFF   7
-#define VIBONOFF        8
+#define VIBRATE         8
 #define VolumeUP        9
 #define VolumeDOWN      10
+
+#define READY   1
+#define ACK     2
+#define REMOTE_CONNECTBT    21
+#define REMOTE_DISCONNECTBT 22
+#define REMOTE_SPKWavePlay  101
+#define REMOTE_RCVWavePlay  102
+#define REMOTE_EARWavePlay  103
+#define REMOTE_LOOPBACKMODE 104
+#define REMOTE_VIBMOTOR     106
+#define REMOTE_SETVOLUME    108
+#define BTSPKWAV            109
+
 
 #endif /* CommandList_h */

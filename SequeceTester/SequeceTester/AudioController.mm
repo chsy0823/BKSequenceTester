@@ -65,12 +65,12 @@ typedef enum aurioTouchDisplayMode {
 
 struct CallbackData {
     AudioUnit               rioUnit;
-    BufferManager*          bufferManager;
-    DCRejectionFilter*      dcRejectionFilter;
+    //BufferManager*          bufferManager;
+    //DCRejectionFilter*      dcRejectionFilter;
     BOOL*                   muteAudio;
     BOOL*                   audioChainIsBeingReconstructed;
     
-    CallbackData(): rioUnit(NULL), bufferManager(NULL), muteAudio(NULL), audioChainIsBeingReconstructed(NULL) {}
+    CallbackData(): rioUnit(NULL), muteAudio(NULL), audioChainIsBeingReconstructed(NULL) {}
 } cd;
 
 // Render callback function
@@ -89,19 +89,19 @@ static OSStatus	performRender (void                         *inRefCon,
         err = AudioUnitRender(cd.rioUnit, ioActionFlags, inTimeStamp, 1, inNumberFrames, ioData);
         
         // filter out the DC component of the signal
-        cd.dcRejectionFilter->ProcessInplace((Float32*) ioData->mBuffers[0].mData, inNumberFrames);
+        //cd.dcRejectionFilter->ProcessInplace((Float32*) ioData->mBuffers[0].mData, inNumberFrames);
         
         // based on the current display mode, copy the required data to the buffer manager
-        if (cd.bufferManager->GetDisplayMode() == aurioTouchDisplayModeOscilloscopeWaveform)
-        {
-            cd.bufferManager->CopyAudioDataToDrawBuffer((Float32*)ioData->mBuffers[0].mData, inNumberFrames);
-        }
-        
-        else if ((cd.bufferManager->GetDisplayMode() == aurioTouchDisplayModeSpectrum) || (cd.bufferManager->GetDisplayMode() == aurioTouchDisplayModeOscilloscopeFFT))
-        {
-            if (cd.bufferManager->NeedsNewFFTData())
-                cd.bufferManager->CopyAudioDataToFFTInputBuffer((Float32*)ioData->mBuffers[0].mData, inNumberFrames);
-        }
+//        if (cd.bufferManager->GetDisplayMode() == aurioTouchDisplayModeOscilloscopeWaveform)
+//        {
+//            cd.bufferManager->CopyAudioDataToDrawBuffer((Float32*)ioData->mBuffers[0].mData, inNumberFrames);
+//        }
+//        
+//        else if ((cd.bufferManager->GetDisplayMode() == aurioTouchDisplayModeSpectrum) || (cd.bufferManager->GetDisplayMode() == aurioTouchDisplayModeOscilloscopeFFT))
+//        {
+//            if (cd.bufferManager->NeedsNewFFTData())
+//                cd.bufferManager->CopyAudioDataToFFTInputBuffer((Float32*)ioData->mBuffers[0].mData, inNumberFrames);
+//        }
         
         // mute audio if needed
         if (*cd.muteAudio)
@@ -131,9 +131,9 @@ static OSStatus	performRender (void                         *inRefCon,
 - (id)init
 {
     if (self = [super init]) {
-        _bufferManager = NULL;
-        _dcRejectionFilter = NULL;
-        _muteAudio = YES;
+        //_bufferManager = NULL;
+        //_dcRejectionFilter = NULL;
+        _muteAudio = NO;
         [self setupAudioChain];
     }
     return self;
@@ -207,9 +207,9 @@ static OSStatus	performRender (void                         *inRefCon,
     usleep(25000); //wait here for some time to ensure that we don't delete these objects while they are being accessed elsewhere
     
     // rebuild the audio chain
-    delete _bufferManager;      _bufferManager = NULL;
-    delete _dcRejectionFilter;  _dcRejectionFilter = NULL;
-    [_audioPlayer release]; _audioPlayer = nil;
+    //delete _bufferManager;      _bufferManager = NULL;
+    //delete _dcRejectionFilter;  _dcRejectionFilter = NULL;
+    _audioPlayer = nil;
     
     [self setupAudioChain];
     [self startIOUnit];
@@ -310,15 +310,15 @@ static OSStatus	performRender (void                         *inRefCon,
         UInt32 propSize = sizeof(UInt32);
         XThrowIfError(AudioUnitGetProperty(_rioUnit, kAudioUnitProperty_MaximumFramesPerSlice, kAudioUnitScope_Global, 0, &maxFramesPerSlice, &propSize), "couldn't get max frames per slice on AURemoteIO");
         
-        _bufferManager = new BufferManager(maxFramesPerSlice);
-        _dcRejectionFilter = new DCRejectionFilter;
+        //_bufferManager = new BufferManager(maxFramesPerSlice);
+        //_dcRejectionFilter = new DCRejectionFilter;
         
         // We need references to certain data in the render callback
         // This simple struct is used to hold that information
         
         cd.rioUnit = _rioUnit;
-        cd.bufferManager = _bufferManager;
-        cd.dcRejectionFilter = _dcRejectionFilter;
+//        cd.bufferManager = _bufferManager;
+//        cd.dcRejectionFilter = _dcRejectionFilter;
         cd.muteAudio = &_muteAudio;
         cd.audioChainIsBeingReconstructed = &_audioChainIsBeingReconstructed;
         
@@ -342,17 +342,6 @@ static OSStatus	performRender (void                         *inRefCon,
     return;
 }
 
-- (void)createButtonPressedSound
-{
-    NSError *error;
-    
-    CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, CFStringRef([[NSBundle mainBundle] pathForResource:@"button_press" ofType:@"caf"]), kCFURLPOSIXPathStyle, false);
-    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:(NSURL*)url error:&error];
-    
-    XThrowIfError((OSStatus)error.code, "couldn't create AVAudioPlayer");
-    
-    CFRelease(url);
-}
 
 - (void)playButtonPressedSound
 {
@@ -363,7 +352,6 @@ static OSStatus	performRender (void                         *inRefCon,
 {
     [self setupAudioSession];
     [self setupIOUnit];
-    [self createButtonPressedSound];
 }
 
 - (OSStatus)startIOUnit
@@ -385,10 +373,10 @@ static OSStatus	performRender (void                         *inRefCon,
     return [[AVAudioSession sharedInstance] sampleRate];
 }
 
-- (BufferManager*)getBufferManagerInstance
-{
-    return _bufferManager;
-}
+//- (BufferManager*)getBufferManagerInstance
+//{
+//    return _bufferManager;
+//}
 
 - (BOOL)audioChainIsBeingReconstructed
 {
@@ -397,11 +385,10 @@ static OSStatus	performRender (void                         *inRefCon,
 
 - (void)dealloc
 {
-    delete _bufferManager;      _bufferManager = NULL;
-    delete _dcRejectionFilter;  _dcRejectionFilter = NULL;
-    [_audioPlayer release];     _audioPlayer = nil;
+    //delete _bufferManager;      _bufferManager = NULL;
+    //delete _dcRejectionFilter;  _dcRejectionFilter = NULL;
+    _audioPlayer = nil;
     
-    [super dealloc];
 }
 
 @end

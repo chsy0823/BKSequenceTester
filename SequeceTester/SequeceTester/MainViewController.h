@@ -10,14 +10,22 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MFSideMenu.h"
 #import "NetworkController.h"
+#import "AudioController.h"
+#import <CoreBluetooth/CoreBluetooth.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface MainViewController : UIViewController<UITableViewDataSource, UITableViewDelegate> {
+@interface MainViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,CBCentralManagerDelegate,CBPeripheralDelegate,CBPeripheralManagerDelegate,UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate> {
     
     NSMutableArray *packetArray;
     NetworkController *networkController;
     AVAudioPlayer *audioPlayer;
     AVAudioSession *audioSession;
     BOOL isBTConnected;
+    BOOL isLoopBackOn;
+    AudioController *audioController;
+    float currentVolume;
+    CBCentralManager *mgr;
+    CBPeripheralManager *manager;
 
 }
 

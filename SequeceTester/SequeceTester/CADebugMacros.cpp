@@ -1,7 +1,6 @@
 /*
- 
-     File: DCRejectionFilter.h
- Abstract: This class implements a DC Rejection Filter which is used to get rid of the DC component in an audio signal
+     File: CADebugMacros.cpp
+ Abstract: CADebugMacros.h
   Version: 2.0
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
@@ -44,27 +43,46 @@
  
  Copyright (C) 2014 Apple Inc. All Rights Reserved.
  
- 
- */
+*/
+#include "CADebugMacros.h"
+#include <stdio.h>
+#include <stdarg.h>
+#if TARGET_API_MAC_OSX
+	#include <syslog.h>
+#endif
 
-#ifndef __aurioTouch3__DCRejectionFilter__
-#define __aurioTouch3__DCRejectionFilter__
+#if DEBUG
+#include <stdio.h>
 
-
-#include <AudioToolbox/AudioToolbox.h>
-
-
-class DCRejectionFilter
+void	DebugPrint(const char *fmt, ...)
 {
-public:
-	DCRejectionFilter();
-    ~DCRejectionFilter();
-    
-	void ProcessInplace(Float32* ioData, UInt32 numFrames);
-    
-private:
-	Float32 mY1;
-	Float32 mX1;
-};
+	va_list args;
+	va_start(args, fmt);
+	vprintf(fmt, args);
+	va_end(args);
+}
+#endif // DEBUG
 
-#endif /* defined(__aurioTouch3__DCRejectionFilter__) */
+#if TARGET_API_MAC_OSX
+void	LogError(const char *fmt, ...)
+{
+	va_list args;
+	va_start(args, fmt);
+#if DEBUG
+	vprintf(fmt, args);
+#endif
+	vsyslog(LOG_ERR, fmt, args);
+	va_end(args);
+}
+
+void	LogWarning(const char *fmt, ...)
+{
+	va_list args;
+	va_start(args, fmt);
+#if DEBUG
+	vprintf(fmt, args);
+#endif
+	vsyslog(LOG_WARNING, fmt, args);
+	va_end(args);
+}
+#endif

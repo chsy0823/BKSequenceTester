@@ -1,7 +1,6 @@
 /*
- 
-     File: DCRejectionFilter.cpp
- Abstract: This class implements a DC Rejection Filter which is used to get rid of the DC component in an audio signal
+     File: CAMath.h
+ Abstract: Part of CoreAudio Utility Classes
   Version: 2.0
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
@@ -44,33 +43,26 @@
  
  Copyright (C) 2014 Apple Inc. All Rights Reserved.
  
- 
- */
+*/
+#ifndef __CAMath_h__
+#define __CAMath_h__
 
-#include "DCRejectionFilter.h"
+#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
+	#include <CoreAudio/CoreAudioTypes.h>
+#else
+	#include <CoreAudioTypes.h>
+#endif
 
+inline bool fiszero(Float64 f) { return (f == 0.); }
+inline bool fiszero(Float32 f) { return (f == 0.f); }
 
-const Float32 kDefaultPoleDist = 0.975f;
+inline bool fnonzero(Float64 f) { return !fiszero(f); }
+inline bool fnonzero(Float32 f) { return !fiszero(f); }
 
+inline bool fequal(const Float64 &a, const Float64 &b) { return a == b; }
+inline bool fequal(const Float32 &a, const Float32 &b) { return a == b; }
 
-DCRejectionFilter::DCRejectionFilter()
-{
-	mY1 = mX1 = 0;
-}
+inline bool fnotequal(const Float64 &a, const Float64 &b) { return !fequal(a, b); }
+inline bool fnotequal(const Float32 &a, const Float32 &b) { return !fequal(a, b); }
 
-
-DCRejectionFilter::~DCRejectionFilter()
-{
-}
-
-
-void DCRejectionFilter::ProcessInplace(Float32* ioData, UInt32 numFrames)
-{
-	for (UInt32 i=0; i < numFrames; i++)
-	{
-        Float32 xCurr = ioData[i];
-		ioData[i] = ioData[i] - mX1 + (kDefaultPoleDist * mY1);
-        mX1 = xCurr;
-        mY1 = ioData[i];
-	}
-}
+#endif // __CAMath_h__

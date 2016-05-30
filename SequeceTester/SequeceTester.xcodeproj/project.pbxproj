@@ -28,11 +28,11 @@
 		DAC2BC531CF7712400D13EBD /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC521CF7712400D13EBD /* PopupViewController.m */; };
 		DAC2BC561CFB3E6200D13EBD /* sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAC2BC551CFB3E6200D13EBD /* sound.wav */; };
 		DAC2BC5F1CFBF4B400D13EBD /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC581CFBF4B400D13EBD /* AudioController.mm */; };
-		DAC2BC601CFBF4B400D13EBD /* BufferManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC5A1CFBF4B400D13EBD /* BufferManager.cpp */; };
-		DAC2BC611CFBF4B400D13EBD /* FFTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC5C1CFBF4B400D13EBD /* FFTHelper.cpp */; };
-		DAC2BC621CFBF4B400D13EBD /* DCRejectionFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC5E1CFBF4B400D13EBD /* DCRejectionFilter.cpp */; };
 		DAC2BC651CFBF4E500D13EBD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2BC641CFBF4E500D13EBD /* AudioToolbox.framework */; };
 		DAC2BC671CFBF4F700D13EBD /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2BC661CFBF4F700D13EBD /* Accelerate.framework */; };
+		DAC2BC7B1CFC042E00D13EBD /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC741CFC042E00D13EBD /* CADebugMacros.cpp */; };
+		DAC2BC7C1CFC042E00D13EBD /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC771CFC042E00D13EBD /* CAStreamBasicDescription.cpp */; };
+		DAC2BC7D1CFC042E00D13EBD /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC791CFC042E00D13EBD /* CAXException.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,14 +93,16 @@
 		DAC2BC551CFB3E6200D13EBD /* sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound.wav; sourceTree = "<group>"; };
 		DAC2BC571CFBF4B400D13EBD /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
 		DAC2BC581CFBF4B400D13EBD /* AudioController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioController.mm; sourceTree = "<group>"; };
-		DAC2BC591CFBF4B400D13EBD /* BufferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferManager.h; sourceTree = "<group>"; };
-		DAC2BC5A1CFBF4B400D13EBD /* BufferManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferManager.cpp; sourceTree = "<group>"; };
-		DAC2BC5B1CFBF4B400D13EBD /* FFTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTHelper.h; sourceTree = "<group>"; };
-		DAC2BC5C1CFBF4B400D13EBD /* FFTHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFTHelper.cpp; sourceTree = "<group>"; };
-		DAC2BC5D1CFBF4B400D13EBD /* DCRejectionFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRejectionFilter.h; sourceTree = "<group>"; };
-		DAC2BC5E1CFBF4B400D13EBD /* DCRejectionFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DCRejectionFilter.cpp; sourceTree = "<group>"; };
 		DAC2BC641CFBF4E500D13EBD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DAC2BC661CFBF4F700D13EBD /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		DAC2BC731CFC042E00D13EBD /* CABitOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CABitOperations.h; sourceTree = "<group>"; };
+		DAC2BC741CFC042E00D13EBD /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
+		DAC2BC751CFC042E00D13EBD /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
+		DAC2BC761CFC042E00D13EBD /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
+		DAC2BC771CFC042E00D13EBD /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
+		DAC2BC781CFC042E00D13EBD /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
+		DAC2BC791CFC042E00D13EBD /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
+		DAC2BC7A1CFC042E00D13EBD /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,14 +231,16 @@
 		DAC2BC631CFBF4BB00D13EBD /* AudioLib */ = {
 			isa = PBXGroup;
 			children = (
+				DAC2BC731CFC042E00D13EBD /* CABitOperations.h */,
+				DAC2BC741CFC042E00D13EBD /* CADebugMacros.cpp */,
+				DAC2BC751CFC042E00D13EBD /* CADebugMacros.h */,
+				DAC2BC761CFC042E00D13EBD /* CAMath.h */,
+				DAC2BC771CFC042E00D13EBD /* CAStreamBasicDescription.cpp */,
+				DAC2BC781CFC042E00D13EBD /* CAStreamBasicDescription.h */,
+				DAC2BC791CFC042E00D13EBD /* CAXException.cpp */,
+				DAC2BC7A1CFC042E00D13EBD /* CAXException.h */,
 				DAC2BC571CFBF4B400D13EBD /* AudioController.h */,
 				DAC2BC581CFBF4B400D13EBD /* AudioController.mm */,
-				DAC2BC591CFBF4B400D13EBD /* BufferManager.h */,
-				DAC2BC5A1CFBF4B400D13EBD /* BufferManager.cpp */,
-				DAC2BC5B1CFBF4B400D13EBD /* FFTHelper.h */,
-				DAC2BC5C1CFBF4B400D13EBD /* FFTHelper.cpp */,
-				DAC2BC5D1CFBF4B400D13EBD /* DCRejectionFilter.h */,
-				DAC2BC5E1CFBF4B400D13EBD /* DCRejectionFilter.cpp */,
 			);
 			name = AudioLib;
 			sourceTree = "<group>";
@@ -375,8 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAC2BC621CFBF4B400D13EBD /* DCRejectionFilter.cpp in Sources */,
-				DAC2BC611CFBF4B400D13EBD /* FFTHelper.cpp in Sources */,
+				DAC2BC7D1CFC042E00D13EBD /* CAXException.cpp in Sources */,
 				DA5110701CF093D70014D428 /* MainViewController.m in Sources */,
 				DAC2BC4B1CF57BEB00D13EBD /* PacketObject.m in Sources */,
 				DA51106D1CF093D70014D428 /* AppDelegate.m in Sources */,
@@ -384,12 +387,13 @@
 				DAC2BC5F1CFBF4B400D13EBD /* AudioController.mm in Sources */,
 				DAC2BC4E1CF6157700D13EBD /* NetworkController.m in Sources */,
 				DAC2BC531CF7712400D13EBD /* PopupViewController.m in Sources */,
+				DAC2BC7B1CFC042E00D13EBD /* CADebugMacros.cpp in Sources */,
 				DAC2BC381CF572CE00D13EBD /* ConsoleTableViewCell.m in Sources */,
-				DAC2BC601CFBF4B400D13EBD /* BufferManager.cpp in Sources */,
 				DAC2BC481CF576D100D13EBD /* SideMenuViewController.m in Sources */,
 				DAC2BC441CF5747700D13EBD /* MFSideMenuShadow.m in Sources */,
 				DAC2BC431CF5747700D13EBD /* MFSideMenuContainerViewController.m in Sources */,
 				DAC2BC451CF5747700D13EBD /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				DAC2BC7C1CFC042E00D13EBD /* CAStreamBasicDescription.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +535,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				INFOPLIST_FILE = SequeceTester/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -544,6 +550,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = SequeceTester/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

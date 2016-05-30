@@ -57,8 +57,10 @@ static NetworkController *singletonInstance;
             //NSLog(@"stx = %@ CRLF = %@ command = %@ length = %@ data = %@",STX, CRLF, command, length, data);
             NSLog(@"parse ok!");
             NSDictionary *dict = @{@"command":command,
-                     @"data":data, @"fullData":inputData
+                     @"data":data, @"length":length, @"fullData":inputData
                      };
+            
+            [self sendCommand:ACK Data:command];
             
             return dict;
         }
