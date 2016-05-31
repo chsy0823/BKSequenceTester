@@ -13,6 +13,8 @@
 @interface PacketObject : NSObject
 
 @property (nonatomic, assign) NSInteger RXTX;
-@property (nonatomic, strong) NSString *contents;
+@property (nonatomic, strong) NSString *command;
+@property (nonatomic, strong) NSString *fullData;
+@property (nonatomic, assign) BOOL isSystemMsg;
 
 @end

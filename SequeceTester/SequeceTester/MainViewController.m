@@ -34,15 +34,10 @@
     audioController = [[AudioController alloc] init];
     
     PacketObject *temp1 = [[PacketObject alloc]init];
-    temp1.contents = @"Start Test";
-    temp1.RXTX = RX;
-    
-    PacketObject *temp2 = [[PacketObject alloc]init];
-    temp2.contents = @"Search Bluetooth";
-    temp2.RXTX = TX;
+    temp1.command = @"System is Ready";
+    temp1.isSystemMsg = true;
     
     [packetArray addObject:temp1];
-    [packetArray addObject:temp2];
     
     NSString *path = [NSString stringWithFormat:@"%@/sound.wav", [[NSBundle mainBundle] resourcePath]];
     NSURL *soundUrl = [NSURL fileURLWithPath:path];
@@ -78,38 +73,44 @@
     NSDictionary* dict = (NSDictionary*)notification.userInfo;
     NSLog(@"%@",dict);
     
+    NSString *fullDataRcv = [dict objectForKey:@"fullData"];
     NSInteger command = [(NSNumber*)[dict objectForKey:@"command"] integerValue];
+    NSString *commandString = @"";
     NSString *data = [dict objectForKey:@"data"];
     int value;
     
+    PacketObject *packetObj = [[PacketObject alloc]init];
+    packetObj.RXTX = RX;
+    packetObj.fullData = fullDataRcv;
+    
     switch (command) {
         case REMOTE_CONNECTBT:
-            
+            commandString = @"Connect BT";
             break;
         case REMOTE_DISCONNECTBT:
-            
+            commandString = @"Disconnect BT";
             break;
         case REMOTE_EARWavePlay:
-            
+            commandString = @"EAR Wave play";
             value = [data intValue];
-            if(!isBTConnected)
+            if(!isBTConnected && value == 1)
                 [self playSound:PATHDEFAULT Stop:false];
             break;
         case REMOTE_RCVWavePlay:
-            
+            commandString = @"RCV Wave play";
             value = [data intValue];
-            if(!isBTConnected)
+            if(!isBTConnected && value == 1)
                 [self playSound:PATHDEFAULT Stop:false];
             break;
         case REMOTE_SPKWavePlay:
-            
+            commandString = @"SPK Wave play";
             value = [data intValue];
-            if(!isBTConnected)
+            if(!isBTConnected && value == 1)
                 [self playSound:PATHSPEAKER Stop:false];
             
             break;
         case REMOTE_SETVOLUME:
-            
+            commandString = [NSString stringWithFormat:@"Set volume to %@",data];
             value = [data intValue];
             float volume = value/100;
             
@@ -117,6 +118,7 @@
             break;
         case REMOTE_LOOPBACKMODE:
             
+            commandString = [NSString stringWithFormat:@"Set loopback mode to %@",data];
             value = [data intValue];
             
             if(value == 0) { //off
@@ -135,10 +137,13 @@
             break;
         case REMOTE_VIBMOTOR:
             
+            commandString = [NSString stringWithFormat:@"vibrate for %@ sec",data];
             value = [data intValue];
             [self playVibrate:value];
             break;
         case BTSPKWAV:
+
+            commandString = @"BT SPK play";
             if(isBTConnected ) {
                 
             }
@@ -146,6 +151,12 @@
         default:
             break;
     }
+    
+    packetObj.command = commandString;
+    
+    [packetArray addObject:packetObj];
+    
+    [self.tableView reloadData];
     
 }
 
@@ -309,9 +320,13 @@
     
     ConsoleTableViewCell *cell = nil;
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"MainCell" owner:self options:nil];
-    cell = [topLevelObjects objectAtIndex:object.RXTX-1];
+    if(object.isSystemMsg) {
+        cell = [topLevelObjects objectAtIndex:2];
+    }
+    else
+        cell = [topLevelObjects objectAtIndex:object.RXTX-1];
 
-    cell.contentLabel.text = [NSString stringWithFormat:@"    %@",object.contents];
+    cell.contentLabel.text = [NSString stringWithFormat:@"    %@",object.command];
     
     return cell;
 }

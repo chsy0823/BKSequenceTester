@@ -21,8 +21,11 @@
 #define VolumeUP        9
 #define VolumeDOWN      10
 
-#define READY   1
-#define ACK     2
+#define READY               0
+#define ACK                 1
+#define SEND_MESSAGE        13
+#define GETINFO             13
+#define SEND_BTINFO         14
 #define REMOTE_CONNECTBT    21
 #define REMOTE_DISCONNECTBT 22
 #define REMOTE_SPKWavePlay  101

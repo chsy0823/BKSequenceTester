@@ -91,5 +91,47 @@
             </connections>
             <point key="canvasLocation" x="485" y="507"/>
         </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="receive" id="Bdd-mL-Ghc" customClass="ConsoleTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bdd-mL-Ghc" id="7ig-49-eCA">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="21.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7C-Ot-tfL">
+                        <rect key="frame" x="8" y="0.0" width="11" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" red="1" green="0.054508132049999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="System" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Lp-0O-wxd">
+                        <rect key="frame" x="35" y="0.0" width="84" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <color key="textColor" red="1" green="0.054508132049999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="c7C-Ot-tfL" firstAttribute="leading" secondItem="7ig-49-eCA" secondAttribute="leading" constant="8" id="B0M-F4-IxJ"/>
+                    <constraint firstItem="8Lp-0O-wxd" firstAttribute="leading" secondItem="c7C-Ot-tfL" secondAttribute="trailing" constant="16" id="HeM-ZG-vis"/>
+                    <constraint firstItem="8Lp-0O-wxd" firstAttribute="top" secondItem="7ig-49-eCA" secondAttribute="top" id="Sge-jw-ocy"/>
+                    <constraint firstAttribute="bottom" secondItem="c7C-Ot-tfL" secondAttribute="bottom" constant="0.5" id="bZs-Jg-Hk0"/>
+                    <constraint firstAttribute="bottom" secondItem="8Lp-0O-wxd" secondAttribute="bottom" constant="0.5" id="c6w-E0-9o8"/>
+                    <constraint firstItem="c7C-Ot-tfL" firstAttribute="top" secondItem="7ig-49-eCA" secondAttribute="top" id="iwp-VD-NKD"/>
+                    <constraint firstAttribute="trailing" secondItem="8Lp-0O-wxd" secondAttribute="trailing" constant="8" id="pvq-NL-eE3"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="pvq-NL-eE3"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="contentLabel" destination="8Lp-0O-wxd" id="tz5-HF-mWl"/>
+                <outlet property="indicator" destination="c7C-Ot-tfL" id="x8G-BV-Yp9"/>
+            </connections>
+            <point key="canvasLocation" x="485" y="583"/>
+        </tableViewCell>
     </objects>
 </document>
