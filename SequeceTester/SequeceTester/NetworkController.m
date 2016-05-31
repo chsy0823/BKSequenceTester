@@ -86,6 +86,9 @@ static NetworkController *singletonInstance;
     
     [InputStream close];
     [OutputStream close];
+    
+    NSDictionary *result = @{@"interruptFlag":@true, @"msg":@"TCP stream disconnected", @"data":@""};
+    [notificationCenter postNotificationName:currentObserverName object:self userInfo:result];
 }
 
 - (void)sendCommand:(int)command Data:(NSString*)data{
@@ -149,11 +152,13 @@ static NetworkController *singletonInstance;
 //****************************************
 - (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)StreamEvent
 {
+    NSDictionary *result;
     
     switch (StreamEvent)
     {
         case NSStreamEventOpenCompleted:
             NSLog(@"TCP Client - Stream opened");
+            result = @{@"interruptFlag":@true, @"msg":@"Connected to server ok!", @"data":@""};
             break;
             
         case NSStreamEventHasBytesAvailable:
@@ -173,10 +178,11 @@ static NetworkController *singletonInstance;
                         {
                             NSLog(@"TCP Client - Server sent: %@", output);
                             
-                            NSDictionary *result = [self parsePacket:output];
-                            
-                            if(result != nil)
+                            if([self parsePacket:output] !=nil) {
+                                result = @{@"interruptFlag":@false, @"msg":@"success", @"data":[self parsePacket:output]};
+                                
                                 [notificationCenter postNotificationName:currentObserverName object:self userInfo:result];
+                            }
                         }
                     }
                 }
@@ -185,10 +191,14 @@ static NetworkController *singletonInstance;
             
         case NSStreamEventErrorOccurred:
             NSLog(@"TCP Client - Can't connect to the host");
+            result = @{@"interruptFlag":@true, @"msg":@"Can't connect to the host", @"data":@""};
+            
+            [notificationCenter postNotificationName:currentObserverName object:self userInfo:result];
             break;
             
         case NSStreamEventEndEncountered:
             NSLog(@"TCP Client - End encountered");
+            result = @{@"interruptFlag":@true, @"msg":@"TCP stream end", @"data":@""};
             [theStream close];
             [theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
             break;

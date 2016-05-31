@@ -73,10 +73,25 @@
     NSDictionary* dict = (NSDictionary*)notification.userInfo;
     NSLog(@"%@",dict);
     
-    NSString *fullDataRcv = [dict objectForKey:@"fullData"];
-    NSInteger command = [(NSNumber*)[dict objectForKey:@"command"] integerValue];
+    BOOL interruptFlag = [(NSNumber*)[dict objectForKey:@"interruptFlag"] boolValue];
+    NSString *msg = [dict objectForKey:@"msg"];
+    NSDictionary *dataDict = [dict objectForKey:@"data"];
+    
+    if(interruptFlag) {
+        
+        PacketObject *packetObj = [[PacketObject alloc]init];
+        packetObj.isSystemMsg = true;
+        packetObj.command = msg;
+        [packetArray addObject:packetObj];
+        [self.tableView reloadData];
+        
+        return;
+    }
+   
+    NSString *fullDataRcv = [dataDict objectForKey:@"fullData"];
+    NSInteger command = [(NSNumber*)[dataDict objectForKey:@"command"] integerValue];
     NSString *commandString = @"";
-    NSString *data = [dict objectForKey:@"data"];
+    NSString *data = [dataDict objectForKey:@"data"];
     int value;
     
     PacketObject *packetObj = [[PacketObject alloc]init];
@@ -194,7 +209,6 @@
 
 - (void)connectBluetooth {
     
-    
 }
 
 - (void)disconnectBluetooth {
@@ -246,6 +260,10 @@
 
 - (void)executeSideMenuAction:(NSInteger)command {
     
+    PacketObject *packetObj = [[PacketObject alloc]init];
+    packetObj.isSystemMsg = true;
+    NSString *commandString = @"";
+    
     switch (command) {
         case ConnectTCPIP:
             [self showIPPopup];
@@ -260,36 +278,45 @@
             [self disconnectBluetooth];
             break;
         case SPKWavePlay:
+            commandString = @"SPK wav play from menu";
             if(!isBTConnected)
                 [self playSound:PATHSPEAKER Stop:false];
             break;
         case RCVWavePlay:
+            commandString = @"RCV wav play from menu";
             if(!isBTConnected)
                 [self playSound:PATHDEFAULT Stop:false];
             break;
         case EARWavePlay:
+            commandString = @"EAR wav play from menu";
             if(!isBTConnected)
                 [self playSound:PATHDEFAULT Stop:false];
             break;
         case LoopBackONOFF:
+            
             if(isLoopBackOn) {
+                commandString = @"loopback off from menu";
                 isLoopBackOn = false;
             }
             else {
+                commandString = @"loopback on from menu";
                 isLoopBackOn = true;
             }
             
             [self loopbackMode:isLoopBackOn];
             break;
         case VIBRATE:
+            commandString = @"Vibrate from menu(default 3 sec)";
             [self playVibrate:3];
             break;
             
         case VolumeUP:
+            commandString = @"Volume up from menu";
             currentVolume += 0.0625;
             [self setVolume:currentVolume];
             break;
         case VolumeDOWN:
+            commandString = @"Volume down from menu";
             currentVolume -= 0.0625;
             [self setVolume:currentVolume];
             break;
@@ -297,6 +324,10 @@
             
             break;
     }
+    
+    packetObj.command = commandString;
+    [packetArray addObject:packetObj];
+    [self.tableView reloadData];
 }
 
 
