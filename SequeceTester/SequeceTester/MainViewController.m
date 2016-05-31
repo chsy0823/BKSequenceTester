@@ -218,7 +218,8 @@
     else if(volume <0)
         volume = 0;
     
-    NSLog(@"volume = %f",volume);
+    currentVolume = volume;
+    NSLog(@"volume = %f",currentVolume);
     [[MPMusicPlayerController applicationMusicPlayer]setVolume:currentVolume];
     //[audioPlayer setVolume:volume];
 }
@@ -336,7 +337,7 @@
 - (void)setIP:(NSString*)ip Port:(NSString*)port {
     
     [networkController setServerWithIP:ip Port:[port intValue]];
-    [networkController sendCommand:002 Data:@"test"];
+    //[networkController sendCommand:002 Data:@"test"];
 }
 
 #pragma mark Bluetooth delegate

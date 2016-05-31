@@ -30,6 +30,7 @@ static NetworkController *singletonInstance;
 - (void)initNetworkController {
     
     notificationCenter = [NSNotificationCenter defaultCenter];
+    
     //[self parsePacket:[self makePacekt:002 Data:@"1q2w3e4r"]];
     
 }
@@ -60,7 +61,10 @@ static NetworkController *singletonInstance;
                      @"data":data, @"length":length, @"fullData":inputData
                      };
             
-            [self sendCommand:ACK Data:command];
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [self sendCommand:ACK Data:command];
+            });
+
             
             return dict;
         }
@@ -87,10 +91,24 @@ static NetworkController *singletonInstance;
 - (void)sendCommand:(int)command Data:(NSString*)data{
     
     NSString *packet = [self makePacekt:command Data:data];
+    [OutputData appendData:[packet dataUsingEncoding:NSUTF8StringEncoding]];
     
-    const uint8_t * rawstring = (const uint8_t *)[packet UTF8String];
-    [OutputStream write:rawstring maxLength:strlen(rawstring)];
+    if(OutputStream.hasSpaceAvailable) {
+        [self sendData];
+    }
+//    const uint8_t * rawstring = (const uint8_t *)[packet UTF8String];
+//    [OutputStream write:rawstring maxLength:strlen(rawstring)];
     
+}
+
+- (void)sendData {
+    
+    if(OutputData.length) {
+        NSInteger wLength = [OutputStream write:(const uint8_t*)OutputData.bytes maxLength:OutputData.length];
+        if ( wLength > 0 )
+            [OutputData replaceBytesInRange:NSMakeRange(0, wLength) withBytes:NULL length:0];
+    }
+
 }
 
 //*******************************************
@@ -108,6 +126,8 @@ static NetworkController *singletonInstance;
     
     CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)serverIP, serverPort, &readStream, &writeStream);
     
+    OutputData = [NSMutableData data];
+    
     InputStream = (__bridge NSInputStream *)readStream;
     OutputStream = (__bridge NSOutputStream *)writeStream;
     
@@ -119,19 +139,6 @@ static NetworkController *singletonInstance;
     
     [InputStream open];
     [OutputStream open];
-}
-
-
-//**********************************
-//**********************************
-//********** SENDING DATA **********
-//**********************************
-//**********************************
-
-- (void)sendData:(NSString*)sendData {
-    
-    NSData *data = [[NSData alloc] initWithData:[sendData dataUsingEncoding:NSASCIIStringEncoding]];
-    [OutputStream write:[data bytes] maxLength:[data length]];    //<<Returns actual number of bytes sent - check if trying to send a large number of bytes as they may well not have all gone in this write and will need sending once there is a hasspaceavailable event
 }
 
 
@@ -171,20 +178,6 @@ static NetworkController *singletonInstance;
                             if(result != nil)
                                 [notificationCenter postNotificationName:currentObserverName object:self userInfo:result];
                         }
-                        
-                        //Send some data (large block where the write may not actually send all we request it to send)
-                        int ActualOutputBytes = [OutputStream write:[OutputData bytes] maxLength:[OutputData length]];
-                        
-                        if (ActualOutputBytes >= [OutputData length])
-                        {
-                            //It was all sent
-                            OutputData = nil;
-                        }
-                        else
-                        {
-                            //Only partially sent
-                            [OutputData replaceBytesInRange:NSMakeRange(0, ActualOutputBytes) withBytes:NULL length:0];        //Remove sent bytes from the start
-                        }
                     }
                 }
             }
@@ -206,22 +199,7 @@ static NetworkController *singletonInstance;
             
         case NSStreamEventHasSpaceAvailable:
             NSLog(@"TCP Client - Has space available event");
-            if (OutputData != nil)
-            {
-                //Send rest of the packet
-                int ActualOutputBytes = [OutputStream write:[OutputData bytes] maxLength:[OutputData length]];
-                
-                if (ActualOutputBytes >= [OutputData length])
-                {
-                    //It was all sent
-                    OutputData = nil;
-                }
-                else
-                {
-                    //Only partially sent
-                    [OutputData replaceBytesInRange:NSMakeRange(0, ActualOutputBytes) withBytes:NULL length:0];        //Remove sent bytes from the start
-                }
-            }
+            [self sendData];
             break;
             
         default:
