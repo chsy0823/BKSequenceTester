@@ -42,6 +42,7 @@
     }
     
     cell.textLabel.text = [menuArray objectAtIndex:indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -51,7 +52,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+    if(indexPath.row < 9)
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
     
     MainViewController *viewController = self.menuContainerViewController.centerViewController;
     [viewController executeSideMenuAction:indexPath.row];

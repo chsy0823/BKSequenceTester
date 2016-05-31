@@ -13,7 +13,7 @@
 #import "AudioController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreLocation/CoreLocation.h>
-
+#import <MediaPlayer/MediaPlayer.h>
 @interface MainViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,CBCentralManagerDelegate,CBPeripheralDelegate,CBPeripheralManagerDelegate,UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate> {
     
     NSMutableArray *packetArray;

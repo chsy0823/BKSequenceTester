@@ -78,6 +78,12 @@ static NetworkController *singletonInstance;
     [self TcpClientInitialise];
 }
 
+- (void)disconnect {
+    
+    [InputStream close];
+    [OutputStream close];
+}
+
 - (void)sendCommand:(int)command Data:(NSString*)data{
     
     NSString *packet = [self makePacekt:command Data:data];

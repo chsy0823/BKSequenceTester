@@ -51,7 +51,8 @@
     audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
     audioSession = [AVAudioSession sharedInstance];
     
-    currentVolume = [audioPlayer volume];
+    //currentVolume = [audioPlayer volume];
+    currentVolume = [[MPMusicPlayerController applicationMusicPlayer] volume];
     
     //mgr = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     //manager = [[CBPeripheralManager alloc]initWithDelegate:self queue:nil];
@@ -133,6 +134,9 @@
 
             break;
         case REMOTE_VIBMOTOR:
+            
+            value = [data intValue];
+            [self playVibrate:value];
             break;
         case BTSPKWAV:
             if(isBTConnected ) {
@@ -203,21 +207,21 @@
     else if(volume <0)
         volume = 0;
     
-    [audioPlayer setVolume:volume];
+    NSLog(@"volume = %f",volume);
+    [[MPMusicPlayerController applicationMusicPlayer]setVolume:currentVolume];
+    //[audioPlayer setVolume:volume];
 }
 
 - (void)playVibrate:(int)sec {
     
-    [self vibeForLong];
-}
-
-- (void)vibeForLong {
-    for (int i = 1; i < 20; i++)
+    int offset = (int)roundf(10/3*sec);
+    
+    for (int i = 1; i < offset; i++)
     {
         [self performSelector:@selector(vibe:) withObject:self afterDelay:i *.3f];
     }
-    
 }
+
 -(void)vibe:(id)sender
 {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
@@ -235,11 +239,13 @@
             [self showIPPopup];
             break;
         case DisconnectTCPIP:
-            
+            [networkController disconnect];
             break;
         case ConnectBT:
+            [self connectBluetooth];
             break;
         case DisconnectBT:
+            [self disconnectBluetooth];
             break;
         case SPKWavePlay:
             if(!isBTConnected)
@@ -268,11 +274,11 @@
             break;
             
         case VolumeUP:
-            currentVolume += 0.1;
+            currentVolume += 0.0625;
             [self setVolume:currentVolume];
             break;
         case VolumeDOWN:
-            currentVolume -= 0.1;
+            currentVolume -= 0.0625;
             [self setVolume:currentVolume];
             break;
         default:

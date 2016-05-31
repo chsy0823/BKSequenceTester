@@ -22,5 +22,6 @@
 + (NetworkController *)sharedInstance;
 - (void)setServerWithIP:(NSString*)ip Port:(int)port;
 - (void)sendCommand:(int)command Data:(NSString*)data;
+- (void)disconnect;
 
 @end
