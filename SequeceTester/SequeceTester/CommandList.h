@@ -23,7 +23,7 @@
 
 #define READY               0
 #define ACK                 1
-#define SEND_MESSAGE        13
+#define SEND_MESSAGE        11
 #define GETINFO             13
 #define SEND_BTINFO         14
 #define REMOTE_CONNECTBT    21

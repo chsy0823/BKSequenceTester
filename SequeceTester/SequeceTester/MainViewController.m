@@ -49,7 +49,10 @@
     //currentVolume = [audioPlayer volume];
     currentVolume = [[MPMusicPlayerController applicationMusicPlayer] volume];
     
-    //mgr = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    mgr = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    
+    NSDictionary *scanOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:CBCentralManagerScanOptionAllowDuplicatesKey];
+    [mgr scanForPeripheralsWithServices:nil options:scanOptions];
     //manager = [[CBPeripheralManager alloc]initWithDelegate:self queue:nil];
 }
 
@@ -162,6 +165,16 @@
             if(isBTConnected ) {
                 
             }
+            break;
+        case SEND_MESSAGE:
+            commandString = [NSString stringWithFormat:@"Receive message : %@",data];
+            
+            break;
+        case SEND_BTINFO:
+            commandString = [NSString stringWithFormat:@"Receive BT info : %@",data];
+            break;
+        case GETINFO:
+            commandString = [NSString stringWithFormat:@"Get Device info"];
             break;
         default:
             break;
