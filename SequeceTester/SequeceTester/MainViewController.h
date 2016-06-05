@@ -11,10 +11,10 @@
 #import "MFSideMenu.h"
 #import "NetworkController.h"
 #import "AudioController.h"
-#import <CoreBluetooth/CoreBluetooth.h>
-#import <CoreLocation/CoreLocation.h>
 #import <MediaPlayer/MediaPlayer.h>
-@interface MainViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,CBCentralManagerDelegate,CBPeripheralDelegate,CBPeripheralManagerDelegate,UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate> {
+#import "MDBluetoothManager.h"
+
+@interface MainViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,UITableViewDataSource,UITableViewDelegate> {
     
     NSMutableArray *packetArray;
     NetworkController *networkController;
@@ -24,12 +24,12 @@
     BOOL isLoopBackOn;
     AudioController *audioController;
     float currentVolume;
-    CBCentralManager *mgr;
-    CBPeripheralManager *manager;
+    MDBluetoothDevice *connectedDevice;
 
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+- (void)receivedBluetoothNotification:(MDBluetoothNotification)bluetoothNotification;
 
 - (IBAction)showMenu:(id)sender;
 - (void)executeSideMenuAction:(NSInteger)command;

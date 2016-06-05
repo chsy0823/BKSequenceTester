@@ -10,13 +10,16 @@
 #import "ConsoleTableViewCell.h"
 #import "PacketObject.h"
 #import "PopupViewController.h"
+#import "BluetoothDevice.h"
+#import "BluetoothManager.h"
 
 #define OBSERVERNAME @"networkCallback"
 
 #define PATHDEFAULT 1
 #define PATHSPEAKER 2
+#define PATHBLUETOOTH   3
 
-@interface MainViewController () <PopupDelegate>
+@interface MainViewController () <PopupDelegate, MDBluetoothObserverProtocol>
 
 @end
 
@@ -49,13 +52,15 @@
     //currentVolume = [audioPlayer volume];
     currentVolume = [[MPMusicPlayerController applicationMusicPlayer] volume];
     
-    mgr = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-    
-    NSDictionary *scanOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:CBCentralManagerScanOptionAllowDuplicatesKey];
-    [mgr scanForPeripheralsWithServices:nil options:scanOptions];
-    //manager = [[CBPeripheralManager alloc]initWithDelegate:self queue:nil];
+    [[MDBluetoothManager sharedInstance] registerObserver:self];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    [[MDBluetoothManager sharedInstance] turnBluetoothOn];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -111,20 +116,38 @@
         case REMOTE_EARWavePlay:
             commandString = @"EAR Wave play";
             value = [data intValue];
-            if(!isBTConnected && value == 1)
-                [self playSound:PATHDEFAULT Stop:false];
+            
+            if(isBTConnected) {
+                commandString = @"Bluetooth is connected..";
+            }
+            else {
+                if(value == 1)
+                    [self playSound:PATHDEFAULT Stop:false];
+            }
             break;
         case REMOTE_RCVWavePlay:
             commandString = @"RCV Wave play";
             value = [data intValue];
-            if(!isBTConnected && value == 1)
-                [self playSound:PATHDEFAULT Stop:false];
+            
+            if(isBTConnected) {
+                commandString = @"Bluetooth is connected..";
+            }
+            else {
+                if(value == 1)
+                    [self playSound:PATHDEFAULT Stop:false];
+            }
             break;
         case REMOTE_SPKWavePlay:
             commandString = @"SPK Wave play";
             value = [data intValue];
-            if(!isBTConnected && value == 1)
-                [self playSound:PATHSPEAKER Stop:false];
+            
+            if(isBTConnected) {
+                commandString = @"Bluetooth is connected..";
+            }
+            else {
+                if(value == 1)
+                    [self playSound:PATHSPEAKER Stop:false];
+            }
             
             break;
         case REMOTE_SETVOLUME:
@@ -163,7 +186,8 @@
 
             commandString = @"BT SPK play";
             if(isBTConnected ) {
-                
+                 commandString = @"Bluetooth is not connected..";
+                [self playSound:PATHDEFAULT Stop:false];
             }
             break;
         case SEND_MESSAGE:
@@ -199,6 +223,26 @@
     [self presentViewController:popup animated:NO completion:nil];
 }
 
+- (AVAudioSessionPortDescription*)bluetoothAudioDevice
+{
+    NSArray* bluetoothRoutes = @[AVAudioSessionPortBluetoothA2DP, AVAudioSessionPortBluetoothLE, AVAudioSessionPortBluetoothHFP];
+    return [self audioDeviceFromTypes:bluetoothRoutes];
+}
+
+
+- (AVAudioSessionPortDescription*)audioDeviceFromTypes:(NSArray*)types
+{
+    NSArray* routes = [[AVAudioSession sharedInstance] availableInputs];
+    for (AVAudioSessionPortDescription* route in routes)
+    {
+        if ([types containsObject:route.portType])
+        {
+            return route;
+        }
+    }
+    return nil;
+}
+
 - (void)playSound:(int)path Stop:(BOOL)stop {
     
     if(stop) {
@@ -210,22 +254,37 @@
             [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
             [audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideNone error:nil];
         }
-        else {
+        else if(path == PATHSPEAKER) {
             [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
             [audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
         }
+        else {
+
+            [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionAllowBluetooth error:nil];
+            AVAudioSessionPortDescription* _bluetoothPort = [self bluetoothAudioDevice];
+            [[AVAudioSession sharedInstance] setPreferredInput:_bluetoothPort error:nil];
+        }
         
         [audioPlayer play];
-        
     }
 }
 
 - (void)connectBluetooth {
     
+    if(!isBTConnected) {
+        
+        [[MDBluetoothManager sharedInstance] startScan];
+    }
 }
 
 - (void)disconnectBluetooth {
     
+    if(isBTConnected) {
+        [connectedDevice.bluetoothDevice disconnect];
+        //[[MDBluetoothManager sharedInstance] turnBluetoothOff];
+        [[MDBluetoothManager sharedInstance] endScan];
+        isBTConnected = false;
+    }
 }
 
 - (void)loopbackMode:(BOOL)on {
@@ -238,6 +297,10 @@
     }
 }
 
+- (void)dealloc {
+    
+    [self disconnectBluetooth];
+}
 - (void)setVolume:(float)volume {
     
     if(volume > 1)
@@ -285,25 +348,38 @@
             [networkController disconnect];
             break;
         case ConnectBT:
+            commandString = @"connect bt";
             [self connectBluetooth];
             break;
         case DisconnectBT:
+            commandString = @"disconnect bt";
             [self disconnectBluetooth];
             break;
         case SPKWavePlay:
             commandString = @"SPK wav play from menu";
             if(!isBTConnected)
                 [self playSound:PATHSPEAKER Stop:false];
+            else {
+                commandString = @"Bluetooth is connected..";
+            }
             break;
         case RCVWavePlay:
             commandString = @"RCV wav play from menu";
-            if(!isBTConnected)
+            if(!isBTConnected) {
                 [self playSound:PATHDEFAULT Stop:false];
+            }
+            else {
+                commandString = @"Bluetooth is connected..";
+            }
             break;
         case EARWavePlay:
             commandString = @"EAR wav play from menu";
-            if(!isBTConnected)
+            if(!isBTConnected) {
                 [self playSound:PATHDEFAULT Stop:false];
+            }
+            else {
+                commandString = @"Bluetooth is connected..";
+            }
             break;
         case LoopBackONOFF:
             
@@ -333,6 +409,16 @@
             currentVolume -= 0.0625;
             [self setVolume:currentVolume];
             break;
+            
+        case BTSPKPLAY:
+            commandString = @"BT spk play from menu";
+            if(isBTConnected ) {
+                [self playSound:PATHBLUETOOTH Stop:false];
+            }
+            else {
+                 commandString = @"Bluetooth is not connected..";
+            }
+            break;
         default:
             
             break;
@@ -341,6 +427,59 @@
     packetObj.command = commandString;
     [packetArray addObject:packetObj];
     [self.tableView reloadData];
+}
+
+
+- (void)receivedBluetoothNotification:
+(MDBluetoothNotification)bluetoothNotification
+{
+    NSArray* detectedBluetoothDevices = [[MDBluetoothManager sharedInstance] discoveredBluetoothDevices];
+    MDBluetoothDevice* bluetoothDevice;
+    BOOL isPowered = [[MDBluetoothManager sharedInstance] bluetoothIsPowered];
+    BluetoothManager *btManager = [BluetoothManager sharedInstance];
+    PacketObject *packetObj = [[PacketObject alloc]init];
+    
+    switch (bluetoothNotification) {
+        case MDBluetoothAvailabilityChangedNotification:
+            
+            break;
+        case MDBluetoothPowerChangedNotification:
+            
+            break;
+        case MDBluetoothDeviceDiscoveredNotification:
+            
+            if(!isBTConnected) {
+                if([detectedBluetoothDevices count] > 0) {
+                    bluetoothDevice = [detectedBluetoothDevices objectAtIndex:0];
+                    
+                    [btManager setDevicePairingEnabled:true];
+                    [btManager setConnectable:true];
+                    [btManager setPincode:@"0000" forDevice:bluetoothDevice.bluetoothDevice];
+                    [btManager connectDevice:bluetoothDevice.bluetoothDevice];
+                    
+                    [btManager connectDevice:bluetoothDevice.bluetoothDevice withServices:0x00002000];
+                    connectedDevice = bluetoothDevice;
+                }
+            }
+            
+            break;
+        case MDBluetoothDeviceRemovedNotification:
+            
+            break;
+        case MDBluetoothDeviceConnectSuccessNotification:
+            
+            if(!isBTConnected) {
+                isBTConnected = true;
+                packetObj.isSystemMsg = true;
+                packetObj.command = [NSString stringWithFormat:@"(%@) is connected",connectedDevice.name];
+                [packetArray addObject:packetObj];
+                [self.tableView reloadData];
+            }
+            
+            break;
+        default:
+            break;
+    }
 }
 
 
@@ -382,124 +521,6 @@
     
     [networkController setServerWithIP:ip Port:[port intValue]];
     //[networkController sendCommand:002 Data:@"test"];
-}
-
-#pragma mark Bluetooth delegate
-
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central{
-    NSString *messtoshow;
-    
-    switch (central.state) {
-        case CBCentralManagerStateUnknown:
-        {
-            messtoshow=[NSString stringWithFormat:@"State unknown, update imminent."];
-            break;
-        }
-        case CBCentralManagerStateResetting:
-        {
-            messtoshow=[NSString stringWithFormat:@"The connection with the system service was momentarily lost, update imminent."];
-            break;
-        }
-        case CBCentralManagerStateUnsupported:
-        {
-            messtoshow=[NSString stringWithFormat:@"The platform doesn't support Bluetooth Low Energy"];
-            break;
-        }
-        case CBCentralManagerStateUnauthorized:
-        {
-            messtoshow=[NSString stringWithFormat:@"The app is not authorized to use Bluetooth Low Energy"];
-            break;
-        }
-        case CBCentralManagerStatePoweredOff:
-        {
-            messtoshow=[NSString stringWithFormat:@"Bluetooth is currently powered off."];
-            NSLog(@"%@",messtoshow);
-            break;
-        }
-        case CBCentralManagerStatePoweredOn:
-        {
-            
-            messtoshow=[NSString stringWithFormat:@"Bluetooth is currently powered on and available to use."];
-            
-            [mgr scanForPeripheralsWithServices:nil options:@{ CBCentralManagerScanOptionAllowDuplicatesKey :@YES}];
-            
-            NSLog(@"%@",messtoshow);
-            break;
-            
-        }
-    }
-}
-
-- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
-    
-    
-    NSLog(@"%@",[NSString stringWithFormat:@"%@",[advertisementData description]]);
-    
-    NSLog(@"%@",[NSString stringWithFormat:@"Discover:%@,RSSI:%@\n",[advertisementData objectForKey:@"kCBAdvDataLocalName"],RSSI]);
-    NSLog(@"Discovered %@", peripheral.name);
-    [mgr  connectPeripheral:peripheral options:nil];
-}
-
-
-- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral{
-    int state = peripheral.state;
-    NSLog(@"Peripheral manager state =  %d", state);
-    
-    //Set the UUIDs for service and characteristic
-    CBUUID *heartRateServiceUUID = [CBUUID UUIDWithString: @"180D"];
-    CBUUID *heartRateCharacteristicUUID = [CBUUID UUIDWithString:@"2A37"];
-    CBUUID *heartRateSensorLocationCharacteristicUUID = [CBUUID UUIDWithString:@"0x2A38"];
-    
-    
-    //char heartRateData[2]; heartRateData[0] = 0; heartRateData[1] = 60;
-    
-    //Create the characteristics
-    CBMutableCharacteristic *heartRateCharacteristic =
-    [[CBMutableCharacteristic alloc] initWithType:heartRateCharacteristicUUID
-                                       properties: CBCharacteristicPropertyNotify
-                                            value:nil
-                                      permissions:CBAttributePermissionsReadable];
-    
-    CBMutableCharacteristic *heartRateSensorLocationCharacteristic =
-    [[CBMutableCharacteristic alloc] initWithType:heartRateSensorLocationCharacteristicUUID
-                                       properties:CBCharacteristicPropertyRead
-                                            value:nil
-                                      permissions:CBAttributePermissionsReadable];
-    //Create the service
-    CBMutableService *myService = [[CBMutableService alloc] initWithType:heartRateServiceUUID primary:YES];
-    myService.characteristics = @[heartRateCharacteristic, heartRateSensorLocationCharacteristic];
-    
-    //Publish the service
-    NSLog(@"Attempting to publish service...");
-    [peripheral addService:myService];
-    
-    //Set the data
-    NSDictionary *data = @{CBAdvertisementDataLocalNameKey:@"iDeviceName",
-                           CBAdvertisementDataServiceUUIDsKey:@[[CBUUID UUIDWithString:@"180D"]]};
-    
-    //Advertise the service
-    NSLog(@"Attempting to advertise service...");
-    [peripheral startAdvertising:data];
-    
-}
-
-- (void)peripheralManager:(CBPeripheralManager *)peripheral
-            didAddService:(CBService *)service
-                    error:(NSError *)error {
-    
-    if (error) {
-        NSLog(@"Error publishing service: %@", [error localizedDescription]);
-    }
-    else NSLog(@"Service successfully published");
-}
-
-- (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral
-                                       error:(NSError *)error {
-    
-    if (error) {
-        NSLog(@"Error advertising: %@", [error localizedDescription]);
-    }
-    else NSLog(@"Service successfully advertising");
 }
 
 

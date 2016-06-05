@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "MFSideMenu.h"
 #import "SideMenuViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @interface AppDelegate ()
 
@@ -28,6 +31,9 @@
                                                     rightMenuViewController:nil];
     self.window.rootViewController = container;
     [self.window makeKeyAndVisible];
+    
+    [Fabric with:@[[Crashlytics class]]];
+
     
     return YES;
 }

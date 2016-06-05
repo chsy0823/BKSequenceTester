@@ -16,7 +16,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    menuArray = [NSArray arrayWithObjects: @"Connect TCP/IP",@"Disconnect TCP/IP",@"Connect BT",@"Disconnect BT", @"SPK Wave Play", @"RCV Wave Play", @"EAR Wave Play", @"Loop Back ON/OFF", @"VIB ON/OFF", @"Volume UP",@"Volume DOWN",nil];
+    menuArray = [NSArray arrayWithObjects: @"Connect TCP/IP",@"Disconnect TCP/IP",@"Connect BT",@"Disconnect BT", @"SPK Wave Play", @"RCV Wave Play", @"EAR Wave Play", @"BT SPK Play", @"Loop Back ON/OFF", @"VIB ON/OFF", @"Volume UP",@"Volume DOWN" ,nil];
     
 }
 
@@ -52,7 +52,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(indexPath.row < 9)
+    if(indexPath.row < 10)
         [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
     
     MainViewController *viewController = self.menuContainerViewController.centerViewController;

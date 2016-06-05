@@ -30,9 +30,13 @@ static NetworkController *singletonInstance;
 - (void)initNetworkController {
     
     notificationCenter = [NSNotificationCenter defaultCenter];
-    
+    connected = false;
     //[self parsePacket:[self makePacekt:002 Data:@"1q2w3e4r"]];
     
+}
+- (BOOL)isConnectedToServer {
+    
+    return connected;
 }
 
 - (NSString*)makePacekt:(int)command Data:(NSString*)data {
@@ -86,6 +90,7 @@ static NetworkController *singletonInstance;
     
     [InputStream close];
     [OutputStream close];
+    connected = false;
     
     NSDictionary *result = @{@"interruptFlag":@true, @"msg":@"TCP stream disconnected", @"data":@""};
     [notificationCenter postNotificationName:currentObserverName object:self userInfo:result];
@@ -159,6 +164,7 @@ static NetworkController *singletonInstance;
         case NSStreamEventOpenCompleted:
             NSLog(@"TCP Client - Stream opened");
             result = @{@"interruptFlag":@true, @"msg":@"Connected to server ok!", @"data":@""};
+            connected = true;
             break;
             
         case NSStreamEventHasBytesAvailable:
@@ -201,6 +207,8 @@ static NetworkController *singletonInstance;
             result = @{@"interruptFlag":@true, @"msg":@"TCP stream end", @"data":@""};
             [theStream close];
             [theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            
+            connected = false;
             break;
             
         case NSStreamEventNone:

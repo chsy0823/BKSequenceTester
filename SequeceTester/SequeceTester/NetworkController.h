@@ -16,6 +16,7 @@
     NSOutputStream *OutputStream;
     NSMutableData *OutputData;
     NSNotificationCenter *notificationCenter;
+    BOOL connected;
 }
 
 @property (nonatomic, strong) NSString *currentObserverName;
@@ -23,5 +24,5 @@
 - (void)setServerWithIP:(NSString*)ip Port:(int)port;
 - (void)sendCommand:(int)command Data:(NSString*)data;
 - (void)disconnect;
-
+- (BOOL)isConnectedToServer;
 @end
