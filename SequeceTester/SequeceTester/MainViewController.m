@@ -271,6 +271,12 @@
 
 - (void)connectBluetooth {
     
+    BOOL isPowered = [[MDBluetoothManager sharedInstance] bluetoothIsPowered];
+    
+    if(!isPowered) {
+        [[MDBluetoothManager sharedInstance] turnBluetoothOn];
+    }
+    
     if(!isBTConnected) {
         
         [[MDBluetoothManager sharedInstance] startScan];
@@ -284,6 +290,10 @@
         //[[MDBluetoothManager sharedInstance] turnBluetoothOff];
         [[MDBluetoothManager sharedInstance] endScan];
         isBTConnected = false;
+        
+        if([networkController isConnectedToServer]) {
+            [networkController sendCommand:DISCONNECTOK Data:@""];
+        }
     }
 }
 
@@ -430,12 +440,10 @@
 }
 
 
-- (void)receivedBluetoothNotification:
-(MDBluetoothNotification)bluetoothNotification
-{
+- (void)receivedBluetoothNotification:(MDBluetoothNotification)bluetoothNotification {
+    
     NSArray* detectedBluetoothDevices = [[MDBluetoothManager sharedInstance] discoveredBluetoothDevices];
     MDBluetoothDevice* bluetoothDevice;
-    BOOL isPowered = [[MDBluetoothManager sharedInstance] bluetoothIsPowered];
     BluetoothManager *btManager = [BluetoothManager sharedInstance];
     PacketObject *packetObj = [[PacketObject alloc]init];
     
@@ -474,6 +482,10 @@
                 packetObj.command = [NSString stringWithFormat:@"(%@) is connected",connectedDevice.name];
                 [packetArray addObject:packetObj];
                 [self.tableView reloadData];
+                
+                if([networkController isConnectedToServer]) {
+                    [networkController sendCommand:CONNECTOK Data:@""];
+                }
             }
             
             break;
