@@ -75,7 +75,6 @@ static NetworkController *singletonInstance;
     }
     
     return nil;
-    
 }
 
 - (void)setServerWithIP:(NSString*)ip Port:(int)port {
@@ -183,9 +182,9 @@ static NetworkController *singletonInstance;
                         if (nil != output)
                         {
                             NSLog(@"TCP Client - Server sent: %@", output);
-                            
-                            if([self parsePacket:output] !=nil) {
-                                result = @{@"interruptFlag":@false, @"msg":@"success", @"data":[self parsePacket:output]};
+                            NSDictionary *parseResult = [self parsePacket:output];
+                            if(parseResult !=nil) {
+                                result = @{@"interruptFlag":@false, @"msg":@"success", @"data":parseResult};
                                 
                                 [notificationCenter postNotificationName:currentObserverName object:self userInfo:result];
                             }

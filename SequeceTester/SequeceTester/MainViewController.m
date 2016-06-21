@@ -53,6 +53,20 @@
     currentVolume = [[MPMusicPlayerController applicationMusicPlayer] volume];
     
     [[MDBluetoothManager sharedInstance] registerObserver:self];
+    
+    deviceToConnect = @"CLUSTER TONG";
+    
+//    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+//    NSMutableArray* arr = [NSMutableArray array ];
+//    
+//    [arr addObject:[NSNumber numberWithBool:YES]];    //stop for 500ms
+//    [arr addObject:[NSNumber numberWithInt:500]];
+//    
+//    [dict setObject:arr forKey:@"VibePattern"];
+//    [dict setObject:[NSNumber numberWithInt:1] forKey:@"Intensity"];
+//    
+//    
+//    AudioServicesPlaySystemSoundWithCompletion(4095,nil,dict);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -108,12 +122,21 @@
     
     switch (command) {
         case REMOTE_CONNECTBT:
+            
             commandString = @"Connect BT";
+            if([data length]>0) {
+                deviceToConnect = data;
+            }
+            
+            [self connectBluetooth];
             break;
         case REMOTE_DISCONNECTBT:
+            
             commandString = @"Disconnect BT";
+            [self disconnectBluetooth];
             break;
         case REMOTE_EARWavePlay:
+            
             commandString = @"EAR Wave play";
             value = [data intValue];
             
@@ -185,9 +208,11 @@
         case BTSPKWAV:
 
             commandString = @"BT SPK play";
-            if(isBTConnected ) {
+            if(!isBTConnected ) {
                  commandString = @"Bluetooth is not connected..";
-                [self playSound:PATHDEFAULT Stop:false];
+            }
+            else {
+                [self playSound:PATHBLUETOOTH Stop:false];
             }
             break;
         case SEND_MESSAGE:
@@ -277,7 +302,10 @@
         [[MDBluetoothManager sharedInstance] turnBluetoothOn];
     }
     
-    if(!isBTConnected) {
+    if(connectedDevice != nil) {
+        [connectedDevice.bluetoothDevice connect];
+    }
+    else if(!isBTConnected) {
         
         [[MDBluetoothManager sharedInstance] startScan];
     }
@@ -326,20 +354,41 @@
 
 - (void)playVibrate:(int)sec {
     
-    int offset = (int)roundf(10/3*sec);
+//    int offset = (int)roundf(10/3*sec);
+//    
+//    for (int i = 1; i < offset; i++)
+//    {
+//        [self performSelector:@selector(vibe:) withObject:self afterDelay:i *.3f];
+//    }
     
-    for (int i = 1; i < offset; i++)
-    {
-        [self performSelector:@selector(vibe:) withObject:self afterDelay:i *.3f];
-    }
+    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+    NSMutableArray* arr = [NSMutableArray array ];
+    
+    [arr addObject:[NSNumber numberWithBool:YES]]; //vibrate for 5000ms
+    [arr addObject:[NSNumber numberWithInt:sec*1000]];
+    
+    [dict setObject:arr forKey:@"VibePattern"];
+    [dict setObject:[NSNumber numberWithInt:1] forKey:@"Intensity"];
+    
+    // suppress warnings
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wall"
+    AudioServicesStopSystemSound(kSystemSoundID_Vibrate);
+    AudioServicesPlaySystemSoundWithVibration(kSystemSoundID_Vibrate,nil,dict);
+#pragma clang diagnostic pop
+    
 }
 
 -(void)vibe:(id)sender
 {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
 }
 
-
+- (IBAction)connectDirect:(id)sender {
+    
+    [self showIPPopup];
+}
 - (IBAction)showMenu:(id)sender {
     [self.menuContainerViewController setMenuState:MFSideMenuStateLeftMenuOpen];
 }
@@ -443,7 +492,6 @@
 - (void)receivedBluetoothNotification:(MDBluetoothNotification)bluetoothNotification {
     
     NSArray* detectedBluetoothDevices = [[MDBluetoothManager sharedInstance] discoveredBluetoothDevices];
-    MDBluetoothDevice* bluetoothDevice;
     BluetoothManager *btManager = [BluetoothManager sharedInstance];
     PacketObject *packetObj = [[PacketObject alloc]init];
     
@@ -458,15 +506,19 @@
             
             if(!isBTConnected) {
                 if([detectedBluetoothDevices count] > 0) {
-                    bluetoothDevice = [detectedBluetoothDevices objectAtIndex:0];
                     
-                    [btManager setDevicePairingEnabled:true];
-                    [btManager setConnectable:true];
-                    [btManager setPincode:@"0000" forDevice:bluetoothDevice.bluetoothDevice];
-                    [btManager connectDevice:bluetoothDevice.bluetoothDevice];
-                    
-                    [btManager connectDevice:bluetoothDevice.bluetoothDevice withServices:0x00002000];
-                    connectedDevice = bluetoothDevice;
+                    for(MDBluetoothDevice* bluetoothDevice in detectedBluetoothDevices) {
+                        
+                        NSLog(@"device name = %@",bluetoothDevice.name);
+                        if([bluetoothDevice.name isEqualToString:deviceToConnect]) {
+                            [btManager setDevicePairingEnabled:true];
+                            [btManager setConnectable:true];
+                            [btManager setPincode:@"0000" forDevice:bluetoothDevice.bluetoothDevice];
+                            [btManager connectDevice:bluetoothDevice.bluetoothDevice];
+                            //[btManager connectDevice:bluetoothDevice.bluetoothDevice withServices:0x00002000];
+                            connectedDevice = bluetoothDevice;
+                        }
+                    }
                 }
             }
             

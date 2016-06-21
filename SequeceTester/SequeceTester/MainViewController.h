@@ -25,13 +25,14 @@
     AudioController *audioController;
     float currentVolume;
     MDBluetoothDevice *connectedDevice;
-
+    NSString *deviceToConnect;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 - (void)receivedBluetoothNotification:(MDBluetoothNotification)bluetoothNotification;
 
 - (IBAction)showMenu:(id)sender;
+- (IBAction)connectDirect:(id)sender;
 - (void)executeSideMenuAction:(NSInteger)command;
 @end
 

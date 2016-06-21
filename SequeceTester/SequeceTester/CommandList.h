@@ -39,6 +39,7 @@
 
 #define CONNECTOK           50
 #define DISCONNECTOK        51
+#define BTSPKPLAYOK         52
 
 
 #endif /* CommandList_h */

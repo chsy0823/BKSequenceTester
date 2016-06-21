@@ -43,6 +43,12 @@
                                                 <action selector="showMenu:" destination="BYZ-38-t0r" id="mSZ-r1-yjH"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="eSG-3t-n9D">
+                                            <color key="tintColor" red="0.99178644220000001" green="1" blue="0.9935383122" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="connectDirect:" destination="BYZ-38-t0r" id="pCX-rp-4cm"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>

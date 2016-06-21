@@ -102,20 +102,23 @@
    [[NSNotificationCenter defaultCenter] addObserver:self
    selector:@selector(bluetoothDeviceDisconnectSuccess:)
    name:@"BluetoothDeviceDisconnectSuccessNotification" object:nil];
-   
-
+    
+    
     // this helped me very much to figure out the methods mentioned the lines
     // above
-    /*
+    
    // credits to http://stackoverflow.com/a/3738387/1864294 :
-   CFNotificationCenterAddObserver(CFNotificationCenterGetLocalCenter(),
+   /*
+    CFNotificationCenterAddObserver(CFNotificationCenterGetLocalCenter(),
    NULL,
    notificationCallback,
    NULL,
    NULL,
    CFNotificationSuspensionBehaviorDeliverImmediately);
-   */
+    */
+   
 }
+
 
 void notificationCallback(CFNotificationCenterRef center, void* observer,
     CFStringRef name, const void* object,

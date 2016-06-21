@@ -18,6 +18,8 @@
 		DA51109C1CF0A0BB0014D428 /* MainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA51109B1CF0A0BB0014D428 /* MainCell.xib */; };
 		DA68701F1D035206001AE48A /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA68701D1D035206001AE48A /* Fabric.framework */; };
 		DA6870201D035206001AE48A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA68701E1D035206001AE48A /* Crashlytics.framework */; };
+		DA6870291D06C158001AE48A /* BDJ-LOGO@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6870271D06C158001AE48A /* BDJ-LOGO@2x.png */; };
+		DA68702A1D06C158001AE48A /* BDJ-LOGO@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6870281D06C158001AE48A /* BDJ-LOGO@3x.png */; };
 		DAC2BC381CF572CE00D13EBD /* ConsoleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC371CF572CD00D13EBD /* ConsoleTableViewCell.m */; };
 		DAC2BC3A1CF5743700D13EBD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC2BC391CF5743700D13EBD /* QuartzCore.framework */; };
 		DAC2BC431CF5747700D13EBD /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC2BC3E1CF5747700D13EBD /* MFSideMenuContainerViewController.m */; };
@@ -58,7 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DA5110651CF093D70014D428 /* SequeceTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SequeceTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA5110651CF093D70014D428 /* BDJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDJ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA5110691CF093D70014D428 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DA51106B1CF093D70014D428 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DA51106C1CF093D70014D428 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -77,6 +79,8 @@
 		DA51109B1CF0A0BB0014D428 /* MainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainCell.xib; sourceTree = "<group>"; };
 		DA68701D1D035206001AE48A /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		DA68701E1D035206001AE48A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		DA6870271D06C158001AE48A /* BDJ-LOGO@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BDJ-LOGO@2x.png"; sourceTree = "<group>"; };
+		DA6870281D06C158001AE48A /* BDJ-LOGO@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BDJ-LOGO@3x.png"; sourceTree = "<group>"; };
 		DAC2BC361CF572CD00D13EBD /* ConsoleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleTableViewCell.h; sourceTree = "<group>"; };
 		DAC2BC371CF572CD00D13EBD /* ConsoleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleTableViewCell.m; sourceTree = "<group>"; };
 		DAC2BC391CF5743700D13EBD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -168,7 +172,7 @@
 		DA5110661CF093D70014D428 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA5110651CF093D70014D428 /* SequeceTester.app */,
+				DA5110651CF093D70014D428 /* BDJ.app */,
 				DA51107E1CF093D70014D428 /* SequeceTesterTests.xctest */,
 				DA5110891CF093D70014D428 /* SequeceTesterUITests.xctest */,
 			);
@@ -202,6 +206,8 @@
 				DA5110711CF093D70014D428 /* Main.storyboard */,
 				DAC2BC4F1CF76EC200D13EBD /* PopupCollection.xib */,
 				DA51109B1CF0A0BB0014D428 /* MainCell.xib */,
+				DA6870271D06C158001AE48A /* BDJ-LOGO@2x.png */,
+				DA6870281D06C158001AE48A /* BDJ-LOGO@3x.png */,
 				DA5110741CF093D70014D428 /* Assets.xcassets */,
 				DA5110761CF093D70014D428 /* LaunchScreen.storyboard */,
 				DA5110791CF093D70014D428 /* Info.plist */,
@@ -299,7 +305,7 @@
 			);
 			name = SequeceTester;
 			productName = SequeceTester;
-			productReference = DA5110651CF093D70014D428 /* SequeceTester.app */;
+			productReference = DA5110651CF093D70014D428 /* BDJ.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA51107D1CF093D70014D428 /* SequeceTesterTests */ = {
@@ -389,6 +395,8 @@
 				DA5110781CF093D70014D428 /* LaunchScreen.storyboard in Resources */,
 				DA51109C1CF0A0BB0014D428 /* MainCell.xib in Resources */,
 				DA5110751CF093D70014D428 /* Assets.xcassets in Resources */,
+				DA68702A1D06C158001AE48A /* BDJ-LOGO@3x.png in Resources */,
+				DA6870291D06C158001AE48A /* BDJ-LOGO@2x.png in Resources */,
 				DA5110731CF093D70014D428 /* Main.storyboard in Resources */,
 				DAC2BC561CFB3E6200D13EBD /* sound.wav in Resources */,
 				DAC2BC501CF76EC200D13EBD /* PopupCollection.xib in Resources */,
@@ -601,7 +609,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bako.sequencer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BDJ;
+				PROVISIONING_PROFILE = "54938e09-8121-40b0-ac41-b6c059b3bf77";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -620,7 +630,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bako.sequencer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BDJ;
+				PROVISIONING_PROFILE = "54938e09-8121-40b0-ac41-b6c059b3bf77";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
